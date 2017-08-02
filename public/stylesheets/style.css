@@ -1,8 +1,17 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lato", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+a,button,Link:focus{
+  border:none;
+}
+a:hover{
+  text-decoration: none;
+}
+input{
+  margin-bottom: 10px;
 }
