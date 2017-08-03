@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+  
     entry: {
         app: './src/app.js'
     },
@@ -9,6 +10,7 @@ module.exports = {
         filename: 'public/build/bundle.js',
         sourceMapFilename: 'public/build/bundle.map'
     },
+    
     devtool: '#source-map',
     module: {
          loaders: [

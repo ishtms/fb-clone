@@ -1,17 +1,21 @@
 body {
   padding: 50px;
-  font: 14px "Lato", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
-}
-a,button,Link:focus{
-  border:none;
-}
-a:hover{
   text-decoration: none;
 }
-input{
+Link:hover,a:hover{
+  text-decoration: none;
+}
+button:focus{
+  border:none;
+}
+#signup_div .row{
+  margin-bottom: 20px;
+}
+#login{
   margin-bottom: 10px;
 }

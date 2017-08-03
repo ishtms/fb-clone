@@ -4,10 +4,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Main from './components/Main';
 
+let flag = false;
+
 var ReactRouter = require('react-router-dom');
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
-
 
 class App extends React.Component{
     render(){
