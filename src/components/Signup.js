@@ -73,7 +73,19 @@ export default class Signup extends Component{
                                         document.getElementById('state').value ="";
                                     }
                                 });
-                        }
+                                //Creating username for friendreq,messages etc
+                            superagent
+                                .post('/register/profile')
+                                .send({username: Details.details.username})
+                                .set("Accept",'application/json')
+                                .end((err,response) =>{
+                                    if(err){
+                                        return err;
+                                        }else{
+                                            console.log(response.body)
+                                    }
+                                });
+                            }
                     }
                 
                 });

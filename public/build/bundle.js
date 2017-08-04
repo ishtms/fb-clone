@@ -12259,6 +12259,10 @@ var _Main = __webpack_require__(234);
 
 var _Main2 = _interopRequireDefault(_Main);
 
+var _ShowUser = __webpack_require__(238);
+
+var _ShowUser2 = _interopRequireDefault(_ShowUser);
+
 var _createBrowserHistory = __webpack_require__(202);
 
 var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
@@ -12298,7 +12302,8 @@ var App = function (_React$Component) {
                     null,
                     _react2.default.createElement(Route, { exact: true, path: '/', component: _Main2.default }),
                     _react2.default.createElement(Route, { exact: true, path: '/login', component: _Login2.default }),
-                    _react2.default.createElement(Route, { exact: true, path: '/signup', component: _Signup2.default })
+                    _react2.default.createElement(Route, { exact: true, path: '/signup', component: _Signup2.default }),
+                    _react2.default.createElement(Route, { exact: true, path: '/show_user/:username/:myusername', component: _ShowUser2.default })
                 )
             );
         }
@@ -27998,6 +28003,14 @@ var Signup = function (_Component) {
                                     document.getElementById('state').value = "";
                                 }
                             });
+                            //Creating username for friendreq,messages etc
+                            _superagent2.default.post('/register/profile').send({ username: Details.details.username }).set("Accept", 'application/json').end(function (err, response) {
+                                if (err) {
+                                    return err;
+                                } else {
+                                    console.log(response.body);
+                                }
+                            });
                         }
                     }
                 });
@@ -28318,12 +28331,33 @@ var HomePage = function (_Component) {
     function HomePage(props) {
         _classCallCheck(this, HomePage);
 
-        return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
+
+        _this.state = {
+            friends: ['ish', "pun", "HarshDev"],
+            status: {}
+        };
+        return _this;
     }
 
     _createClass(HomePage, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var findFriends = this.state.friends.map(function (friend, index) {
+                var url = "/show_user/" + _this2.state.friends[index] + "/" + _this2.props.username;
+                return _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: url, key: index },
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        friend
+                    )
+                );
+            });
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -28333,12 +28367,23 @@ var HomePage = function (_Component) {
                     { className: 'row', id: 'content' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-xs-4 col-md-4 col-lg-4', id: 'friend-section' },
-                        'Friends'
+                        { className: 'col-xs-3 col-md-3 col-lg-3 text-center', id: 'friend-section' },
+                        _react2.default.createElement(
+                            'span',
+                            { id: 'title' },
+                            'Friends'
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'ul',
+                            { id: 'friend-list' },
+                            findFriends
+                        )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-xs-7 col-md-7 col-lg-7', id: 'status-section' },
+                        { className: 'col-xs-8 col-md-8 col-lg-8', id: 'status-section' },
                         'Status'
                     )
                 )
@@ -28384,10 +28429,7 @@ var Navigation = function (_Component) {
     function Navigation(props) {
         _classCallCheck(this, Navigation);
 
-        var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this, props));
-
-        _this.state = {};
-        return _this;
+        return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this, props));
     }
 
     _createClass(Navigation, [{
@@ -28425,6 +28467,191 @@ var Navigation = function (_Component) {
 }(_react.Component);
 
 exports.default = Navigation;
+
+/***/ }),
+/* 237 */,
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(7);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(37);
+
+var _superagent = __webpack_require__(97);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+var _Navigation = __webpack_require__(236);
+
+var _Navigation2 = _interopRequireDefault(_Navigation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ShowUser = function (_Component) {
+    _inherits(ShowUser, _Component);
+
+    function ShowUser(props) {
+        _classCallCheck(this, ShowUser);
+
+        var _this = _possibleConstructorReturn(this, (ShowUser.__proto__ || Object.getPrototypeOf(ShowUser)).call(this, props));
+
+        _this.state = {
+            username: "",
+            fullname: "",
+            phone: "",
+            state: "",
+            email: "",
+            currentuser: ""
+        };
+        return _this;
+    }
+
+    _createClass(ShowUser, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            var user = this.props.location.pathname.slice(11).split("/")[0];
+            var currentuser = this.props.location.pathname.slice(11).split("/")[1];
+            var Details = Object.assign({}, this.state);
+            console.log(user, currentuser);
+            _superagent2.default.get('/register/finduser').query({ username: user }).set("Accept", "application/json").end(function (err, response) {
+                if (err) {
+                    console.log("Some error");
+                } else {
+                    if (response.body.result.length > 0) {
+                        Details.fullname = response.body.result[0].fname + " " + response.body.result[0].lname;
+                        Details.username = response.body.result[0].username;
+                        Details.phone = response.body.result[0].phone;
+                        Details.state = response.body.result[0].state;
+                        Details.email = response.body.result[0].email;
+                        Details.currentuser = currentuser;
+                        _this2.setState(Details);
+                    } else {
+                        console.log('user not found');
+                    }
+                }
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log(this.state);
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_Navigation2.default, { username: this.state.currentuser }),
+                _react2.default.createElement(
+                    'div',
+                    { style: { fontFamily: 'Lato', marginTop: "4em" }, id: 'displaydatabox' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row', style: { width: "100%" } },
+                        _react2.default.createElement('div', { className: 'col-xs-3 col-md-3 col-lg-4' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-xs-4 col-md-6 col-lg-4', id: 'display-data-box' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row', id: 'display-data-box' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-5 col-md-5 col-lg-5' },
+                                    'Username :'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-7 col-md-7 col-lg-7' },
+                                    this.state.username
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-5 col-md-5 col-lg-5' },
+                                    'Full Name :'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-7 col-md-7 col-lg-7' },
+                                    this.state.fullname
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-5 col-md-5 col-lg-5' },
+                                    'Email :'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-7 col-md-7 col-lg-7' },
+                                    this.state.email
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-5 col-md-5 col-lg-5' },
+                                    'Phone No :'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-7 col-md-7 col-lg-7' },
+                                    this.state.phone
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-5 col-md-5 col-lg-5' },
+                                    'State :'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-xs-7 col-md-7 col-lg-7' },
+                                    this.state.state
+                                )
+                            )
+                        ),
+                        _react2.default.createElement('div', { className: 'col-xs-3 col-md-3 col-lg-4' })
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('br', null)
+                )
+            );
+        }
+    }]);
+
+    return ShowUser;
+}(_react.Component);
+
+exports.default = ShowUser;
 
 /***/ })
 /******/ ]);

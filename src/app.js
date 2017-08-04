@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Main from './components/Main';
+import ShowUser from './components/ShowUser';
 import createHistory from 'history/createBrowserHistory';
 
 var history = createHistory();
@@ -20,6 +21,7 @@ class App extends React.Component{
                     <Route exact path="/" component={Main} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/signup" component={Signup} />
+                    <Route exact path="/show_user/:username/:myusername" component={ShowUser} />
                 </div>
             </Router>
         );

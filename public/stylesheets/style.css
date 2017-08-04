@@ -36,6 +36,16 @@ button:focus{
   height: 7%;
   left:0
 }
+
+#display-data-box{
+  background-color: cyan;
+  color: blueviolet;
+  border-radius: 10px;
+  height: 80%;
+}
+#displaydatabox{
+  font-size: 1.8em;
+}
 #content{
   margin-top: 55px;
 }
@@ -48,9 +58,33 @@ button:focus{
 
   }
 }
+#friend-section{
+  padding-top: 1.7em;
+}
+#title{
+  font-size: 1.4em;
+}
 @media(max-width:700px){
   #navigation{
     padding-top: 3px;
     font-size: 0.9em;
   }
+  #displaydatabox{
+    font-size: 1em
+  }
+}
+#friend-list{
+  font-family: "Lato", sans-serif
+}
+#friend-list li{
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  background-color: khaki;
+  margin-bottom: 2px;
+  display: inline-block;
+}
+ul{
+  padding: 6px
 }
