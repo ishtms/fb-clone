@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import superagent from 'superagent';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const history = createBrowserHistory({forceRefresh:true});
 
 export default class Login extends Component{
     constructor(props){
@@ -28,7 +31,11 @@ export default class Login extends Component{
                     response.status(403).send()
                 }else{
                      if(response.body.result.length>0){
-                         document.getElementById('info').innerHTML = "Succesfully Logged in!"
+                         document.getElementById('info').innerHTML = "Succesfully Logged in!";
+                         history.push('/',{username:Details.username});
+                     }else{
+                         console.log('this is running')
+                         document.getElementById('info').innerHTML = "Wrong username or password!";
                      }
                 }
             });

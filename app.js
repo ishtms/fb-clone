@@ -10,6 +10,8 @@ var session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
+var s_check = require('./routes/s_check');
+
 var app = express();
 
 //connecting to mongodb
@@ -31,14 +33,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: "wlk2jl34kjojslkdfj29",resave:false,saveUninitialized:true}));
+app.use(session({secret: "wlk2jl34kjojslkdfj29", resave:false, saveUninitialized:true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/register', register);
+app.use('/s_check',s_check);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
