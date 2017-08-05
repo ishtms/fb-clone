@@ -13,8 +13,15 @@ a {
 Link:hover,a:hover{
   text-decoration: none;
 }
+button{
+  cursor: pointer
+}
+
 button:focus{
   border:none;
+}
+#logout{
+  cursor: pointer;
 }
 #logout:hover{
   cursor: pointer;
