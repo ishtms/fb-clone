@@ -28559,14 +28559,9 @@ var Signup = function (_Component) {
                             _react2.default.createElement('br', null)
                         ),
                         _react2.default.createElement(
-                            _reactTouchEvents2.default,
-                            {
-                                onTap: this.handleSignUp.bind(this) },
-                            _react2.default.createElement(
-                                'button',
-                                { type: 'submit', id: 'signup', className: 'btn btn-block btn-success' },
-                                'Signup'
-                            )
+                            'button',
+                            { style: { cursor: 'pointer' }, type: 'submit', id: 'signup', onClick: this.handleSignUp.bind(this), className: 'btn btn-block btn-success' },
+                            'Signup'
                         ),
                         _react2.default.createElement('br', null),
                         _react2.default.createElement(
