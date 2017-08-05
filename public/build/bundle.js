@@ -28564,7 +28564,7 @@ var Signup = function (_Component) {
                                 onTap: this.handleSignUp.bind(this) },
                             _react2.default.createElement(
                                 'button',
-                                { id: 'signup', className: 'btn btn-block btn-success' },
+                                { id: 'signup', onTouchStart: this.handleSignUp.bind(this), onClick: this.handleSignUp.bind(this), className: 'btn btn-block btn-success' },
                                 'Signup'
                             )
                         ),

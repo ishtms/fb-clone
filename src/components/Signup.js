@@ -143,7 +143,7 @@ export default class Signup extends Component{
                         </div>
                         <ReactTouchEvents 
                             onTap={ this.handleSignUp.bind(this) }>
-                            <button  id="signup" className="btn btn-block btn-success">Signup</button>
+                            <button  id="signup" onTouchStart={this.handleSignUp.bind(this)} onClick={this.handleSignUp.bind(this)} className="btn btn-block btn-success">Signup</button>
                             </ReactTouchEvents>
                             <br />
 
