@@ -14,7 +14,8 @@ var register = require('./routes/register');
 var s_check = require('./routes/s_check');
 
 var app = express();
-
+var initReactFastclick = require('react-fastclick');
+initReactFastclick();
 //connecting to mongodb
 mongoose.connect('mongodb://ishtmeet:390775866@ds051903.mlab.com:51903/fb-clone', function(err){
   if(err){

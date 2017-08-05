@@ -6,7 +6,8 @@ import Main from './components/Main';
 import ShowUser from './components/ShowUser';
 import AddUser from './components/AddUser';
 import createHistory from 'history/createBrowserHistory';
-
+import initReactFastclick from 'react-fastclick';
+initReactFastclick();
 var history = createHistory();
 let flag = false;
 
