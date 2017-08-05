@@ -54,7 +54,8 @@ router.post('/signup',function(req,res,next){
         }
     })
 })
-router.put('/profile/addfriend/:current/:target',function(req,res,next){
+router.put('/profile/addfriend/:target',function(req,res,next){
+    console.log("OK CALLED")
     ProfileSchema.findOne({username: req.params.target},function(err,data){
         if(err){
             res.json({
@@ -62,17 +63,30 @@ router.put('/profile/addfriend/:current/:target',function(req,res,next){
                 err: err
             })
         }else{
+            if(data == null){
+                res.json({
+                    confirmation: 'fail',
+                    message: 'User not available'
+                })
+                return;
+            }
             var friendList = data.friends;
-            if(friendList.indexOf(req.params.current)<0){
-                friendList.push(req.params.current);
+            if(friendList.indexOf(req.session.username)<0){
+                friendList.push(req.session.username);
+            }else{
+                res.json({
+                    confirmation: 'already ther',
+                    message: "User already Friend!"
+                })
+                return;
             }
             data.friends = friendList;
             data.save((err, updatedObj)=>{
-                 ProfileSchema.findOne({username: req.params.current},function(err,data){
+                 ProfileSchema.findOne({username: req.session.username},function(err,data){
                     if(err){
                         res.json({
                             confirmation: 'fail',
-                            err: err
+                            message: "Error Occured"
                         })
                     }else{
                         var friendList = data.friends;
@@ -83,7 +97,7 @@ router.put('/profile/addfriend/:current/:target',function(req,res,next){
                         data.save((err, updatedObj)=>{
                             res.json({
                                 confirmation: 'success',
-                                updatedObj : updatedObj
+                                message: "User added to Friend list!"
                             })
                         })
                     }
@@ -92,6 +106,9 @@ router.put('/profile/addfriend/:current/:target',function(req,res,next){
         }
     })
    
+})
+router.get('/logout', function(req,res,next){
+    req.session.destroy();
 })
 router.get('/profile', function(req,res,next){
     ProfileSchema.find({username: req.query.username}, (err,response) => {

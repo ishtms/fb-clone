@@ -16,7 +16,7 @@ var s_check = require('./routes/s_check');
 var app = express();
 
 //connecting to mongodb
-mongoose.connect('mongodb://localhost:27017/codebook', function(err){
+mongoose.connect('mongodb://ishtmeet:390775866@ds051903.mlab.com:51903/fb-clone', function(err){
   if(err){
     console.log(err)
   }else{

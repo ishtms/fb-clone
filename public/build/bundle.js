@@ -12562,6 +12562,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(19);
 
+var _createBrowserHistory = __webpack_require__(58);
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
+var _superagent = __webpack_require__(39);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12569,6 +12577,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var history = (0, _createBrowserHistory2.default)({ forceRefresh: true });
 
 var Navigation = function (_Component) {
     _inherits(Navigation, _Component);
@@ -12580,6 +12590,18 @@ var Navigation = function (_Component) {
     }
 
     _createClass(Navigation, [{
+        key: 'handleLogout',
+        value: function handleLogout() {
+            history.push("/");
+            _superagent2.default.get('/register/logout').query({}).set("Accept", "application/json").end(function (err, response) {
+                if (err) {
+                    console.log("Error");
+                } else {
+                    console.log("Logged out");
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -12603,7 +12625,12 @@ var Navigation = function (_Component) {
                             { to: '/add' },
                             'Search User'
                         ),
-                        ' | Profile | Friends | Logout'
+                        ' | Profile | Friends | ',
+                        _react2.default.createElement(
+                            'span',
+                            { id: 'logout', onClick: this.handleLogout.bind(this) },
+                            'Logout'
+                        )
                     )
                 )
             );
@@ -12648,6 +12675,10 @@ var _ShowUser = __webpack_require__(237);
 
 var _ShowUser2 = _interopRequireDefault(_ShowUser);
 
+var _AddUser = __webpack_require__(238);
+
+var _AddUser2 = _interopRequireDefault(_AddUser);
+
 var _createBrowserHistory = __webpack_require__(58);
 
 var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
@@ -12688,6 +12719,7 @@ var App = function (_React$Component) {
                     _react2.default.createElement(Route, { exact: true, path: '/', component: _Main2.default }),
                     _react2.default.createElement(Route, { exact: true, path: '/login', component: _Login2.default }),
                     _react2.default.createElement(Route, { exact: true, path: '/signup', component: _Signup2.default }),
+                    _react2.default.createElement(Route, { exact: true, path: '/add', component: _AddUser2.default }),
                     _react2.default.createElement(Route, { exact: true, path: '/show_user/:username/:myusername', component: _ShowUser2.default })
                 )
             );
@@ -28392,6 +28424,10 @@ var _Navigation = __webpack_require__(99);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
+var _superagent = __webpack_require__(39);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28403,13 +28439,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var HomePage = function (_Component) {
     _inherits(HomePage, _Component);
 
+    _createClass(HomePage, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            var friendArray = [];
+
+            _superagent2.default.get('/register/profile').query({ username: this.props.username }).set("Accept", "application/json").end(function (err, response) {
+                if (err) {
+                    console.log("Some error " + err);
+                } else {
+                    response.body.result[0].friends.map(function (user) {
+                        friendArray.push(user);
+                    });
+                    _this2.setState({
+                        friends: friendArray
+                    });
+                }
+            });
+        }
+    }]);
+
     function HomePage(props) {
         _classCallCheck(this, HomePage);
 
         var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
 
         _this.state = {
-            friends: ['ish', "pun", "HarshDev"],
+            friends: [],
             status: {}
         };
         return _this;
@@ -28418,10 +28476,10 @@ var HomePage = function (_Component) {
     _createClass(HomePage, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var findFriends = this.state.friends.map(function (friend, index) {
-                var url = "/show_user/" + _this2.state.friends[index] + "/" + _this2.props.username;
+                var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
                     _reactRouterDom.Link,
                     { to: url, key: index },
@@ -28654,6 +28712,123 @@ var ShowUser = function (_Component) {
 }(_react.Component);
 
 exports.default = ShowUser;
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(19);
+
+var _superagent = __webpack_require__(39);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddUser = function (_Component) {
+    _inherits(AddUser, _Component);
+
+    function AddUser(props) {
+        _classCallCheck(this, AddUser);
+
+        var _this = _possibleConstructorReturn(this, (AddUser.__proto__ || Object.getPrototypeOf(AddUser)).call(this, props));
+
+        _this.state = {
+            username: '',
+            message: 'Type the correct username'
+        };
+        return _this;
+    }
+
+    _createClass(AddUser, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var Details = Object.assign({}, this.state);
+            Details.username = event.target.value;
+
+            this.setState(Details);
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit() {
+            var _this2 = this;
+
+            console.log("THIS WAS CLICKED");
+            var Details = Object.assign({}, this.state);
+            var url = "/register/profile/addfriend/" + this.state.username;
+            console.log(url);
+            _superagent2.default.put(url).send({ somedata: "lsdkjf" }).set("Accept", 'application/json').end(function (err, response) {
+                if (err) {
+                    Details.message = "User not found";
+                    _this2.setState(Details);
+                    console.log(err);
+                    document.getElementById("search-user").value = "";
+                } else {
+                    console.log(response.body);
+                    Details.message = response.body.message;
+                    _this2.setState(Details);
+                    document.getElementById("search-user").value = "";
+                }
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log(this.state);
+            return _react2.default.createElement(
+                'div',
+                { style: { marginTop: '20%' } },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement('div', { className: 'col-xs-2 col-md-3 col-lg-4' }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-xs-8 col-md-6 col-lg-4 text-center' },
+                        'Search by Username',
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'alert alert-info' },
+                            this.state.message
+                        ),
+                        _react2.default.createElement('input', { type: 'text', id: 'search-user', className: 'form-control text-center', placeholder: 'Username', onChange: this.handleChange.bind(this) }),
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn btn-primary', onClick: this.handleSubmit.bind(this), style: { marginTop: 20 } },
+                            'Search'
+                        )
+                    ),
+                    _react2.default.createElement('div', { className: 'col-xs-2 col-md-3 col-lg-4' })
+                )
+            );
+        }
+    }]);
+
+    return AddUser;
+}(_react.Component);
+
+exports.default = AddUser;
 
 /***/ })
 /******/ ]);

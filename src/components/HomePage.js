@@ -1,11 +1,33 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Navigation from './Navigation';
+import superagent from 'superagent';
+
 export default class HomePage extends Component{
+    componentWillMount(){
+        var friendArray = [];
+        
+        superagent
+            .get('/register/profile')
+            .query({username: this.props.username})
+            .set("Accept", "application/json")
+            .end((err, response) => {
+                if(err){
+                    console.log("Some error "+ err);
+                }else{
+                    response.body.result[0].friends.map((user) => {
+                        friendArray.push(user);
+                    })
+                    this.setState({
+                        friends: friendArray
+                    })
+                }
+            });
+    }
     constructor(props){
         super(props);
         this.state = {
-            friends: ['ish',"pun","HarshDev"],
+            friends: [],
             status: {}
         }
     }

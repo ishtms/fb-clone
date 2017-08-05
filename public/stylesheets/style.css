@@ -16,6 +16,10 @@ Link:hover,a:hover{
 button:focus{
   border:none;
 }
+#logout:hover{
+  cursor: pointer;
+  transform: scale(1.2)
+}
 #signup_div .row{
   margin-bottom: 20px;
 }
