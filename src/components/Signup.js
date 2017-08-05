@@ -142,8 +142,8 @@ export default class Signup extends Component{
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
                         <ReactTouchEvents 
-                            onTap={ this.handleSignUp }>
-                            <button type="submit"  className="btn btn-block btn-success">Signup</button>
+                            onTap={ this.handleSignUp.bind(this) }>
+                            <button type="submit" id="signup" className="btn btn-block btn-success">Signup</button>
                             </ReactTouchEvents>
                             <br />
 

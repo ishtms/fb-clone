@@ -19,7 +19,9 @@ Link:hover,a:hover{
 button{
   cursor: pointer
 }
-
+#signup{
+  cursor: pointer
+}
 button:focus{
   border:none;
 }
