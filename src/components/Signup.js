@@ -74,6 +74,7 @@ export default class Signup extends Component{
                                     }
                                 });
                                 //Creating username for friendreq,messages etc
+                                console.log(typeof(Details.details.username))
                             superagent
                                 .post('/register/profile')
                                 .send({username: Details.details.username})
