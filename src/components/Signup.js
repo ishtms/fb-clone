@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import superagent from 'superagent';
 import ReactTouchEvents from 'react-touch-events'
+import Tappable from 'react-tappable';
 
 let available = false;
 export default class Signup extends Component{
@@ -110,7 +111,7 @@ export default class Signup extends Component{
                     <div className="col-md-7 col-xs-7 col-lg-7">
                         <div className="row">
                         <h2 className="text-center text-primary">Please enter your details </h2><br /><br />
-                            <div id="alert-message" className="text-center alert alert-info">{(this.state.validation) ? "Provide accurate information please" : "Please fill up all the blanks"}</div>
+                            <div id="alert-message" className="text-center alert alert-info">{(this.state.validation) ? "Provide accurate information please." : "Please fill up all the blanks"}</div>
                             <br />
 
                             <div className="col-xs-3 col-md-3 col-lg-3">First Name: &nbsp;</div>
@@ -140,7 +141,7 @@ export default class Signup extends Component{
                             <div className="col-xs-3 col-md-3 col-lg-3">State: &nbsp;</div>
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
-                        <ReactTouchEvents onTap={this.handleSignUp} ><button type="submit" onClick={this.handleSignUp} className="btn btn-block btn-success">Signup</button></ReactTouchEvents><br />
+                        <Tappable onTap={this.handleSignUp} ><button type="submit" onClick={this.handleSignUp} className="btn btn-block btn-success">Signup</button></Tappable><br />
                         <Link style={{textDecoration:'none'}} to="/login"><button className="btn btn-block btn-success">Already have an account?</button></Link>
                         
                     </div>
