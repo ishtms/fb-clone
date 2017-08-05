@@ -4,6 +4,7 @@ import Navigation from './Navigation';
 import superagent from 'superagent';
 import Status from './Status';
 import AllStatus from './AllStatus';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class HomePage extends Component{
     componentWillMount(){
@@ -63,7 +64,13 @@ export default class HomePage extends Component{
         var findStatus = 
             sortedStatus.map((status,index) => {
                 return (
+                    <ReactCSSTransitionGroup 
+                    transitionName="fade"
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={300}
+                    >
                     <li key={index}><AllStatus status={status}/></li>
+                    </ReactCSSTransitionGroup>
                 );
             })
         console.log("render from parent");
