@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Navigation from './Navigation';
 import superagent from 'superagent';
+import Status from './Status';
+import AllStatus from './AllStatus';
 
 export default class HomePage extends Component{
     componentWillMount(){
@@ -28,10 +30,43 @@ export default class HomePage extends Component{
         super(props);
         this.state = {
             friends: [],
-            status: {}
+            status: [
+                {
+                    username: "Ishtmeet",
+                    message: "Hello this is a wonderful day",
+                    time: new Date()
+                },
+                {
+                    username: "Tavleen",
+                    message: "Hello despacito reached 3 Billion views!",
+                    time: new Date()
+                }
+            ],
+            currentStatus: ""
         }
     }
+    renderChange(event){
+        let Details = Object.assign({},this.state);
+        Details.currentStatus = event.target.value;
+        this.setState(Details);
+    }
+    submitChange(){
+        let Details = Object.assign({},this.state);
+        Details.status.push({username: this.props.username, message: Details.currentStatus, time: new Date()});
+        this.setState(Details)
+        document.getElementById('status-text').value = ""
+    }
     render(){
+        var sortedStatus = this.state.status.sort((a,b) => {
+            return (b.time - a.time);
+        })
+        var findStatus = 
+            sortedStatus.map((status,index) => {
+                return (
+                    <li key={index}><AllStatus status={status}/></li>
+                );
+            })
+        console.log("render from parent");
         var findFriends =
             this.state.friends.map((friend, index)=>{
                 let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
@@ -50,8 +85,11 @@ export default class HomePage extends Component{
                     {findFriends}
                     </ul>
                 </div>
-                <div className="col-xs-8 col-md-8 col-lg-8" id="status-section">
-                    Status
+                <div className="col-xs-8 col-md-8 col-lg-8" id="status-section" style={{marginTop:"5%"}}>
+                    <Status username={this.props.username} callback={this.renderChange.bind(this)} callback_two={this.submitChange.bind(this)} />
+                    <ul id="status-list">
+                    {findStatus}
+                    </ul>
                 </div>
             </div>
         </div>
