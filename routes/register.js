@@ -66,6 +66,7 @@ router.put('/profile/addfriend/:target',function(req,res,next){
                 res.json({
                     confirmation: 'fail',
                     message: 'User not available'
+                    
                 })
                 return;
             }
