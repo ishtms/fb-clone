@@ -20,7 +20,7 @@ mongoose.connect('mongodb://ishtmeet:390775866@ds051903.mlab.com:51903/fb-clone'
   if(err){
     console.log(err)
   }else{
-    console.log('connected to mongodb://localhost:27017/codebook')
+    console.log('connected to mongodb://ishtmeet:390775866@ds051903.mlab.com:51903/fb-clone')
   }
 });
 

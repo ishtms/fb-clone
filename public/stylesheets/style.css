@@ -71,11 +71,8 @@ button:focus{
 @media(max-width:700px){
   #navigation{
     padding-top: 3px;
-    font-size: 0.9em;
   }
-  #displaydatabox{
-    font-size: 1em
-  }
+  
 }
 #friend-list{
   font-family: "Lato", sans-serif
