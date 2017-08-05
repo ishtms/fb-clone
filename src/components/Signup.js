@@ -141,7 +141,10 @@ export default class Signup extends Component{
                             <div className="col-xs-3 col-md-3 col-lg-3">State: &nbsp;</div>
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
-                            <button style={{cursor: 'pointer'}} type="submit" id="signup" onClick={this.handleSignUp.bind(this)} className="btn btn-block btn-success">Signup</button>
+                        <ReactTouchEvents 
+                            onTap={ this.handleSignUp.bind(this) }>
+                            <button  id="signup" className="btn btn-block btn-success">Signup</button>
+                            </ReactTouchEvents>
                             <br />
 
                         <Link style={{textDecoration:'none'}} to="/login"><button className="btn btn-block btn-success">Already have an account?</button></Link>
