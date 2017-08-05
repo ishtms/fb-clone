@@ -111,7 +111,7 @@ export default class Signup extends Component{
                     <div className="col-md-7 col-xs-7 col-lg-7">
                         <div className="row">
                         <h2 className="text-center text-primary">Please enter your details </h2><br /><br />
-                            <div id="alert-message" className="text-center alert alert-info">{(this.state.validation) ? "Provide accurate information please." : "Please fill up all the blanks"}</div>
+                            <div id="alert-message" className="text-center alert alert-info">{(this.state.validation) ? "Provide accurate information please" : "Please fill up all the blanks"}</div>
                             <br />
 
                             <div className="col-xs-3 col-md-3 col-lg-3">First Name: &nbsp;</div>

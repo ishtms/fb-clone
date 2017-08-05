@@ -28453,7 +28453,7 @@ var Signup = function (_Component) {
                             _react2.default.createElement(
                                 'div',
                                 { id: 'alert-message', className: 'text-center alert alert-info' },
-                                this.state.validation ? "Provide accurate information please." : "Please fill up all the blanks"
+                                this.state.validation ? "Provide accurate information please" : "Please fill up all the blanks"
                             ),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement(
