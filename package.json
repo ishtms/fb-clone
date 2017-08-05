@@ -20,6 +20,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
+    "react-touch-events": "^2.1.0",
     "serve-favicon": "~2.4.2",
     "superagent": "^3.5.2",
     "webpack": "^3.4.1"
