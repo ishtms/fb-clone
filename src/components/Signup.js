@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import superagent from 'superagent';
 import initReactFastclick from 'react-fastclick';
-initReactFastclick();
+import ReactTouchEvents from "react-touch-events";
+
 let available = false;
 export default class Signup extends Component{
     
@@ -140,7 +141,12 @@ export default class Signup extends Component{
                             <div className="col-xs-3 col-md-3 col-lg-3">State: &nbsp;</div>
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
-                        <button type="submit" onClick={this.handleSignUp} className="btn btn-block btn-success">Signup</button><br />
+                        <ReactTouchEvents 
+                            onTap={ this.handleSignUp }>
+                            <button type="submit"  className="btn btn-block btn-success">Signup</button>
+                            </ReactTouchEvents>
+                            <br />
+
                         <Link style={{textDecoration:'none'}} to="/login"><button className="btn btn-block btn-success">Already have an account?</button></Link>
                         
                     </div>
