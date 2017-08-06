@@ -25,15 +25,20 @@ export default class Navigation extends Component{
     }
     render(){
         return (
-            <div id="navigation">
-                <div className='row'>
-                    <div className="col-xs-6 col-md-6 col-lg-6 inCenter">
-                        Welcome to CodeBook, {this.props.username}!
+            <div className="navbar-fixed">
+                <nav>
+                    <div className='nav-wrapper'>
+                        <div className="brand-logo lato">
+                            Welcome to CodeBook, {this.props.username}!
+                        </div>
+                        <ul id="nav-mobile" className="right hide-on-med-and-down lato" style={{marginTop: "0px"}}>
+                                <li><Link to="/add">Search User</Link></li>
+                                <li><a>Profile</a></li>
+                                <li><a>Friends</a></li>
+                                <li id="logout" onClick={this.handleLogout.bind(this)}><a>Logout</a></li>
+                        </ul>
                     </div>
-                    <div className="col-xs-6 col-md-6 col-lg-6 text-right inCenter">
-                        <Link to="/add">Search User</Link> | Profile | Friends | <span id="logout" onClick={this.handleLogout.bind(this)}>Logout</span>
-                    </div>
-                </div>
+                </nav>
             </div>
         );
     }

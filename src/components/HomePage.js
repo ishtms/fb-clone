@@ -70,7 +70,7 @@ export default class HomePage extends Component{
         var findFriends =
             this.state.friends.map((friend, index)=>{
                 let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
-                return (<Link to={url} key={index}><li>{friend}</li></Link>);
+                return (<li key={index}><Link to={url} key={index}>{friend}</Link></li>);
             });
         
        return (
@@ -81,7 +81,7 @@ export default class HomePage extends Component{
                     <span id="title">Friends</span>
                     <br />
                     <br />
-                    <ul id="friend-list" >
+                    <ul id="friend-list" style={{padding: 6}} >
                     {findFriends}
                     </ul>
                 </div>

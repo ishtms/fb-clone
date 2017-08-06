@@ -28,16 +28,17 @@ export default class Login extends Component{
             .set("Accept","application/json")
             .end(function(err,response){
                 if(err){
-                         document.getElementById('info').innerHTML = "Some error occured! Check your internet conenction and try again";
+                          Materialize.toast('Some error occured! Check your internet connection and try again!', 4000)
                     response.status(403).send()
 
                 }else{
                      if(response.body.result.length>0){
-                         document.getElementById('info').innerHTML = "Succesfully Logged in!";
+                          Materialize.toast('Successfully signed in!', 4000)
                          history.push('/',{username:Details.username});
                      }else{
                          console.log('this is running')
-                         document.getElementById('info').innerHTML = "Wrong username or password!";
+                          Materialize.toast('Wrong Username or password!', 4000)
+                         hideMe();
                      }
                 }
             });
@@ -51,7 +52,6 @@ export default class Login extends Component{
 
                     </div>
                     <div className="col-md-4 col-xs-4 col-lg-4">
-                        <div className="alert alert-info" style={{width: "100%"}} id="info">Login Please</div>
                         <input className="form-control" type="text" placeholder="Username" onChange={this.renderChange} id="username" /> <br />
                         <input className="form-control" type="password" placeholder="Password" onChange={this.renderChange} id="password" /> <br />
                         <button  onClick={this.handleLogin.bind(this)} className="btn btn-block btn-success" id="login">Login</button>  

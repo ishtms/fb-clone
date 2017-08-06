@@ -12899,30 +12899,59 @@ var Navigation = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'navigation' },
+                { className: 'navbar-fixed' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
+                    'nav',
+                    null,
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-xs-6 col-md-6 col-lg-6 inCenter' },
-                        'Welcome to CodeBook, ',
-                        this.props.username,
-                        '!'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-xs-6 col-md-6 col-lg-6 text-right inCenter' },
+                        { className: 'nav-wrapper' },
                         _react2.default.createElement(
-                            _reactRouterDom.Link,
-                            { to: '/add' },
-                            'Search User'
+                            'div',
+                            { className: 'brand-logo lato' },
+                            'Welcome to CodeBook, ',
+                            this.props.username,
+                            '!'
                         ),
-                        ' | Profile | Friends | ',
                         _react2.default.createElement(
-                            'span',
-                            { id: 'logout', onClick: this.handleLogout.bind(this) },
-                            'Logout'
+                            'ul',
+                            { id: 'nav-mobile', className: 'right hide-on-med-and-down lato', style: { marginTop: "0px" } },
+                            _react2.default.createElement(
+                                'li',
+                                null,
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: '/add' },
+                                    'Search User'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                null,
+                                _react2.default.createElement(
+                                    'a',
+                                    null,
+                                    'Profile'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                null,
+                                _react2.default.createElement(
+                                    'a',
+                                    null,
+                                    'Friends'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                { id: 'logout', onClick: this.handleLogout.bind(this) },
+                                _react2.default.createElement(
+                                    'a',
+                                    null,
+                                    'Logout'
+                                )
+                            )
                         )
                     )
                 )
@@ -25260,15 +25289,16 @@ var Login = function (_Component) {
             var Details = Object.assign({}, this.state);
             _superagent2.default.get('/register').query({ username: Details.username, password: Details.password }).set("Accept", "application/json").end(function (err, response) {
                 if (err) {
-                    document.getElementById('info').innerHTML = "Some error occured! Check your internet conenction and try again";
+                    Materialize.toast('Some error occured! Check your internet connection and try again!', 4000);
                     response.status(403).send();
                 } else {
                     if (response.body.result.length > 0) {
-                        document.getElementById('info').innerHTML = "Succesfully Logged in!";
+                        Materialize.toast('Successfully signed in!', 4000);
                         history.push('/', { username: Details.username });
                     } else {
                         console.log('this is running');
-                        document.getElementById('info').innerHTML = "Wrong username or password!";
+                        Materialize.toast('Wrong Username or password!', 4000);
+                        hideMe();
                     }
                 }
             });
@@ -25292,11 +25322,6 @@ var Login = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'col-md-4 col-xs-4 col-lg-4' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'alert alert-info', style: { width: "100%" }, id: 'info' },
-                            'Login Please'
-                        ),
                         _react2.default.createElement('input', { className: 'form-control', type: 'text', placeholder: 'Username', onChange: this.renderChange, id: 'username' }),
                         ' ',
                         _react2.default.createElement('br', null),
@@ -28442,14 +28467,15 @@ var Signup = function (_Component) {
             if (Details.details.email.length == 0 || Details.details.fname.length == 0 || Details.details.lname.length == 0 || Details.details.password.length == 0 || Details.details.phone.length == 0 || Details.details.state.length == 0 || Details.details.username.length == 0) {
                 Details.validation = false;
                 this.setState(Details);
+                Materialize.toast('Please enter all fields', 4000);
             } else if (Details.details.username.length < 5) {
-                document.getElementById('alert-message').innerHTML = "UserName Should be atleast 6 characters long";
+                Materialize.toast('Username should be atleast 6 characters long!', 4000);
             } else if (Details.details.email.indexOf('@') < 0 || Details.details.email.indexOf('.com') < 0) {
-                document.getElementById('alert-message').innerHTML = "Please enter a valid e-mail address";
+                Materialize.toast('Please enter a valid E-mail address!', 4000);
             } else if (Details.details.password.length < 8) {
-                document.getElementById('alert-message').innerHTML = "Password should be atleast 8 characters Long!";
+                Materialize.toast('Password length should be atleast 8 characters long', 4000);
             } else if (Details.details.phone.length != 10) {
-                document.getElementById('alert-message').innerHTML = "Phone number should be 10 digits long";
+                Materialize.toast('Phone number should have 10 digits!', 4000);
             } else {
                 _superagent2.default.get('/register/checkusername').query({ username: Details.details.username }).set("Accept", "application/json").end(function (err, response) {
                     if (err) {
@@ -28458,13 +28484,13 @@ var Signup = function (_Component) {
                     } else {
 
                         if (response.body.result.length > 0) {
-                            document.getElementById('alert-message').innerHTML = "Username already taken. Try any other";
+                            Materialize.toast('Username already taken, try another!', 4000);
                         } else {
                             _superagent2.default.post('/register/signup').send(Details.details).set("Accept", 'application/json').end(function (err, response) {
                                 if (err) {
                                     return err;
                                 } else {
-                                    document.getElementById('alert-message').innerHTML = "SignUp Succesful! You can Login now.";
+                                    Materialize.toast('Congratulations! Your account has been created. You may login now.', 4000);
                                     document.getElementById('fname').value = "";
                                     document.getElementById('lname').value = "";
                                     document.getElementById('password').value = "";
@@ -28621,14 +28647,6 @@ var Signup = function (_Component) {
                             ),
                             _react2.default.createElement('br', null)
                         ),
-                        _react2.default.createElement(
-                            'div',
-                            { id: 'alert-message', className: 'text-center alert alert-danger' },
-                            this.state.validation ? "Provide accurate information please" : "Please fill up all the blanks",
-                            '\xA0\xA0\xA0\xA0',
-                            _react2.default.createElement('i', { className: 'fa fa-info-circle' })
-                        ),
-                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'button',
                             { id: 'signup', onTouchStart: this.handleSignUp.bind(this), onClick: this.handleSignUp.bind(this), className: 'btn waves-efect waves-light btn btn-block' },
@@ -29910,11 +29928,11 @@ var HomePage = function (_Component) {
             var findFriends = this.state.friends.map(function (friend, index) {
                 var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: url, key: index },
+                    'li',
+                    { key: index },
                     _react2.default.createElement(
-                        'li',
-                        null,
+                        _reactRouterDom.Link,
+                        { to: url, key: index },
                         friend
                     )
                 );
@@ -29939,7 +29957,7 @@ var HomePage = function (_Component) {
                         _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'ul',
-                            { id: 'friend-list' },
+                            { id: 'friend-list', style: { padding: 6 } },
                             findFriends
                         )
                     ),

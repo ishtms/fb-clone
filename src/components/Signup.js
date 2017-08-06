@@ -33,14 +33,15 @@ export default class Signup extends Component{
          Details.details.username.length==0){
             Details.validation = false;
             this.setState(Details)
+             Materialize.toast('Please enter all fields', 4000)
         }else if(Details.details.username.length <5){
-            document.getElementById('alert-message').innerHTML = "UserName Should be atleast 6 characters long";
+             Materialize.toast('Username should be atleast 6 characters long!', 4000)
         }else if(Details.details.email.indexOf('@')<0 || Details.details.email.indexOf('.com')<0){
-            document.getElementById('alert-message').innerHTML = "Please enter a valid e-mail address";
+             Materialize.toast('Please enter a valid E-mail address!', 4000)
         }else if(Details.details.password.length<8){
-            document.getElementById('alert-message').innerHTML = "Password should be atleast 8 characters Long!";
+             Materialize.toast('Password length should be atleast 8 characters long', 4000)
         }else if(Details.details.phone.length!=10){
-            document.getElementById('alert-message').innerHTML = "Phone number should be 10 digits long";
+             Materialize.toast('Phone number should have 10 digits!', 4000)
         }else{
             superagent
             .get('/register/checkusername')
@@ -53,7 +54,7 @@ export default class Signup extends Component{
                 }else{
                     
                    if(response.body.result.length>0){
-                       document.getElementById('alert-message').innerHTML = "Username already taken. Try any other";
+                        Materialize.toast('Username already taken, try another!', 4000)
                    }else 
                     {
                         superagent
@@ -64,7 +65,7 @@ export default class Signup extends Component{
                                 if(err){
                                     return err;
                                     }else{
-                                        document.getElementById('alert-message').innerHTML = "SignUp Succesful! You can Login now.";
+                                         Materialize.toast('Congratulations! Your account has been created. You may login now.', 4000)
                                         document.getElementById('fname').value ="";
                                         document.getElementById('lname').value ="";
                                         document.getElementById('password').value ="";
@@ -140,7 +141,6 @@ export default class Signup extends Component{
                             <div className="col-xs-3 col-md-3 col-lg-3">State: &nbsp;</div>
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
-                        <div id="alert-message" className="text-center alert alert-danger">{(this.state.validation) ? "Provide accurate information please" : "Please fill up all the blanks"}&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-info-circle"></i></div><br />
                             <button  id="signup"  onTouchStart={this.handleSignUp.bind(this)} onClick={this.handleSignUp.bind(this)} className="btn waves-efect waves-light btn btn-block"><i className="material-icons right"></i>Submit</button>
                             
                             <br />

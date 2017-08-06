@@ -16,6 +16,9 @@ a {
 Link:hover,a:hover{
   text-decoration: none;
 }
+a{
+  text-decoration: none;
+}
 button{
   cursor: pointer
 }
@@ -37,6 +40,9 @@ button:focus{
 }
 #login{
   margin-bottom: 10px;
+}
+nav ul a{
+  text-decoration: none;
 }
 #navigation{
   width: 100%;
@@ -119,6 +125,6 @@ button:focus{
   opacity: 0;
   transition: opacity 300ms ease-out;
 }
-ul{
-  padding: 6px
+.lato{
+  font-family: "Lato",sans-serif
 }
