@@ -40,6 +40,7 @@ button:focus{
 }
 #navigation{
   width: 100%;
+  z-index: 200;
   position: fixed;
   top: 0;
   padding-left: 0.8em;
