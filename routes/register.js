@@ -24,6 +24,24 @@ router.get('/', function(req,res,next){
         }   
     })
 });
+
+router.get('/checkusername', function(req,res,next){
+    res.setHeader('Content-Type', 'application/json');
+    UserSchema.find(req.query,null, (err,response) =>{
+        if(err){
+            res.json({
+                confirmation: 'fail',
+                err: err
+            })
+        }else{
+            res.json({
+                'result': response
+            })
+        }   
+    })
+});
+
+
 router.get('/finduser', function(req,res,next){
     res.setHeader('Content-Type', 'application/json');
     UserSchema.find(req.query,null, (err,response) =>{

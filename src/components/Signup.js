@@ -43,7 +43,7 @@ export default class Signup extends Component{
             document.getElementById('alert-message').innerHTML = "Phone number should be 10 digits long";
         }else{
             superagent
-            .get('/register')
+            .get('/register/checkusername')
             .query({username: Details.details.username})
             .set("Accept", "application/json")
             .end(function(err,response){

@@ -25256,9 +25256,11 @@ var Login = function (_Component) {
     }, {
         key: 'handleLogin',
         value: function handleLogin() {
+            clickedMe();
             var Details = Object.assign({}, this.state);
             _superagent2.default.get('/register').query({ username: Details.username, password: Details.password }).set("Accept", "application/json").end(function (err, response) {
                 if (err) {
+                    document.getElementById('info').innerHTML = "Some error occured! Check your internet conenction and try again";
                     response.status(403).send();
                 } else {
                     if (response.body.result.length > 0) {
@@ -28449,7 +28451,7 @@ var Signup = function (_Component) {
             } else if (Details.details.phone.length != 10) {
                 document.getElementById('alert-message').innerHTML = "Phone number should be 10 digits long";
             } else {
-                _superagent2.default.get('/register').query({ username: Details.details.username }).set("Accept", "application/json").end(function (err, response) {
+                _superagent2.default.get('/register/checkusername').query({ username: Details.details.username }).set("Accept", "application/json").end(function (err, response) {
                     if (err) {
                         console.log(err);
                         available = false;
@@ -29717,6 +29719,11 @@ var Main = function (_React$Component) {
                 }
             });
         }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('it called');
+        }
     }]);
 
     function Main(props) {
@@ -29738,7 +29745,7 @@ var Main = function (_React$Component) {
             console.log("after request username is ", this.state.username);
             return !isNaN(this.state.username.length) && this.state.username.length > 0 ? _react2.default.createElement(_HomePage2.default, { username: this.state.username }) : _react2.default.createElement(
                 'div',
-                null,
+                { style: { marginTop: "10%" } },
                 _react2.default.createElement(
                     'h2',
                     { className: 'text-center' },
@@ -29849,6 +29856,9 @@ var HomePage = function (_Component) {
                 }
             });
         }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
     }]);
 
     function HomePage(props) {

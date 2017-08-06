@@ -20,6 +20,9 @@ export default class Main extends React.Component{
                     
                 });
     }
+            componentDidMount(){
+                console.log('it called')
+            }
     constructor(props){
         super(props);
         this.state = {
@@ -33,7 +36,7 @@ export default class Main extends React.Component{
         console.log("after request username is ",this.state.username)
         return (
             (!isNaN(this.state.username.length) && this.state.username.length >0)?<HomePage username={this.state.username}/>:
-            <div>
+            <div style={{marginTop: "10%"}}>
                 <h2 className="text-center">Welcome to Codebook</h2>
                  <div className="text-center">
                     Already have an account?<Link to='/login'><button className="btn btn-primary">Login</button></Link><br />

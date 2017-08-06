@@ -20,6 +20,7 @@ export default class Login extends Component{
         this.setState(Details);
     }
     handleLogin(){  
+        clickedMe();
         let Details = Object.assign({},this.state);
         superagent
             .get('/register')
@@ -27,7 +28,9 @@ export default class Login extends Component{
             .set("Accept","application/json")
             .end(function(err,response){
                 if(err){
+                         document.getElementById('info').innerHTML = "Some error occured! Check your internet conenction and try again";
                     response.status(403).send()
+
                 }else{
                      if(response.body.result.length>0){
                          document.getElementById('info').innerHTML = "Succesfully Logged in!";

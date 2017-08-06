@@ -10,10 +10,21 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
+  <img src="/images/loading.gif" style="height:100%; width:100%; position:fixed; background-color: white" id="loading"  />
     <div id="app"></div>
     <script src="/build/bundle.js"></script>
       <!-- Compiled and minified JavaScript -->
+      <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script type="text/javascript">
+        $(window).on('load',function(){
+          $('#loading').hide();
+        });
+        function clickedMe(){
+          $('#loading').show();
+          $('#loading').css("z-index","100")
+        }
+  </script>
 
   </body>
 </html>

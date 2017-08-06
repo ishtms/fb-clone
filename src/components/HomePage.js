@@ -27,6 +27,10 @@ export default class HomePage extends Component{
                 }
             });
     }
+        componentDidMount(){
+                        
+
+        }
     constructor(props){
         super(props);
         this.state = {
