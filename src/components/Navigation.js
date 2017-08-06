@@ -27,7 +27,7 @@ export default class Navigation extends Component{
         if(window.screen.width > 780) 
           return (<nav>
                 <div className="nav-wrapper">
-                    <a className='dropdown-button btn brand-logo center' style={{paddingTop:"18px",background:'transparent', height:"100%",width:"100%"}}  data-activates='dropdown1'>
+                    <a id="showsDropDown" className='dropdown-button btn brand-logo center' style={{paddingTop:"18px",background:'transparent', height:"100%",width:"100%"}}  data-activates='dropdown1'>
                         Welcome to CodeBook, {this.props.username}! <span className="fa fa-arrow-circle-down"></span>
                     </a>
                     <ul id="dropdown1" className="dropdown-content">

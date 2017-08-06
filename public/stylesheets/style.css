@@ -70,6 +70,18 @@ nav ul a{
   height: 60px;
   left:0
 }
+.showDropDown{
+    background-color: #fff;
+    margin: 0;
+    display: inline;
+    min-width: 100%;
+    max-height: 650px;
+    overflow-y: auto;
+    opacity: 100;
+    position: absolute;
+    z-index: 999;
+    will-change: width, height;
+}
 
 #display-data-box{
   background-color: cyan;
