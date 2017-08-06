@@ -18,7 +18,7 @@ export default class Status extends Component{
                         <textarea onChange={this.props.callback} rows="3" id="status-text" className="form-control"/><br />
                     </div>
                     <div className="col-xs-2 col-md-3 col-lg-4">
-                        <button onClick={this.props.callback_two} className="btn btn-block btn-info">Post</button>
+                        <button onClick={this.props.callback_two} id="post-button" className="btn btn-block btn-info text-center" style={{padding: 0}}>Post</button>
                     </div>
                 </div>
             </div>

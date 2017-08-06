@@ -25,21 +25,23 @@ export default class Navigation extends Component{
     }
     render(){
         return (
-            <div className="navbar-fixed">
-                <nav>
-                    <div className='nav-wrapper'>
-                        <div className="brand-logo lato">
-                            Welcome to CodeBook, {this.props.username}!
-                        </div>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down lato" style={{marginTop: "0px"}}>
-                                <li><Link to="/add">Search User</Link></li>
-                                <li><a>Profile</a></li>
-                                <li><a>Friends</a></li>
-                                <li id="logout" onClick={this.handleLogout.bind(this)}><a>Logout</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            <nav>
+                <div className="nav-wrapper">
+                    <a className='dropdown-button btn brand-logo center' style={{paddingTop:"18px",background:'transparent', height:"100%",width:"100%"}} href='#' data-activates='dropdown1'>
+                        Welcome to CodeBook, {this.props.username}! <span className="fa fa-arrow-circle-down"></span>
+                    </a>
+                    <ul id="dropdown1" className="dropdown-content">
+                        <li><Link className=" text-center" to="/add">Search User</Link></li>
+                        <li className="divider" />
+                        <li className="center"><Link className=" text-center" to="">Profile</Link></li>
+                        <li className="divider" />
+                        <li><Link to="" className=" text-center">Friends</Link></li>
+                        <li className="divider" />
+                        <li><a className=" text-center" id="logout" onClick={this.handleLogout.bind(this)}>Logout</a></li>
+                    </ul>
+
+                </div>
+            </nav>
         );
     }
 }

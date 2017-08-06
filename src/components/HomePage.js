@@ -56,10 +56,19 @@ export default class HomePage extends Component{
         this.setState(Details);
     }
     submitChange(){
+        
         let Details = Object.assign({},this.state);
-        Details.status.push({username: this.props.username, message: Details.currentStatus, time: new Date()});
-        this.setState(Details)
-        document.getElementById('status-text').value = ""
+        if(Details.currentStatus==""){
+            Materialize.toast("Sorry, you can't post an empty status!", 4000)
+        }else{
+            Details.status.push({username: this.props.username, message: Details.currentStatus, time: new Date()});
+            this.setState(Details)
+            this.setState({
+                currentStatus: ""
+            })            
+            document.getElementById('status-text').value = ""
+        }
+        
     }
     render(){
         var sortedStatus = this.state.status.sort((a,b) => {

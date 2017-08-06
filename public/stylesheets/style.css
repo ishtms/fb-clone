@@ -13,12 +13,19 @@ a {
   color: #00B7FF;
   text-decoration: none;
 }
-Link:hover,a:hover{
-  text-decoration: none;
+a:hover{
+  text-decoration: none !important;
 }
-a{
-  text-decoration: none;
+.card-action a{
+  padding: 0 10px;
+  height: 60px !important;
 }
+a:focus{
+    text-decoration: none !important;
+}
+  #status-row{
+    width: 90% !important;
+  }
 button{
   cursor: pointer
 }
@@ -48,6 +55,7 @@ nav ul a{
   width: 100%;
   z-index: 200;
   position: fixed;
+  background-color: teal;
   top: 0;
   padding-left: 0.8em;
   padding-right: 0.8em;
@@ -55,7 +63,6 @@ nav ul a{
   color: white;
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  background-color: burlywood;
   height: 7%;
   left:0
 }
@@ -91,7 +98,9 @@ nav ul a{
   #navigation{
     padding-top: 3px;
   }
-  
+  .brand-logo{
+    font-size: 18px !important;
+  }
 }
 #friend-list{
   font-family: "Lato", sans-serif

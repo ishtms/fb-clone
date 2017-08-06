@@ -12898,59 +12898,59 @@ var Navigation = function (_Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                { className: 'navbar-fixed' },
+                'nav',
+                null,
                 _react2.default.createElement(
-                    'nav',
-                    null,
+                    'div',
+                    { className: 'nav-wrapper' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'nav-wrapper' },
+                        'a',
+                        { className: 'dropdown-button btn brand-logo center', style: { paddingTop: "18px", background: 'transparent', height: "100%", width: "100%" }, href: '#', 'data-activates': 'dropdown1' },
+                        'Welcome to CodeBook, ',
+                        this.props.username,
+                        '! ',
+                        _react2.default.createElement('span', { className: 'fa fa-arrow-circle-down' })
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { id: 'dropdown1', className: 'dropdown-content' },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'brand-logo lato' },
-                            'Welcome to CodeBook, ',
-                            this.props.username,
-                            '!'
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { className: ' text-center', to: '/add' },
+                                'Search User'
+                            )
                         ),
+                        _react2.default.createElement('li', { className: 'divider' }),
                         _react2.default.createElement(
-                            'ul',
-                            { id: 'nav-mobile', className: 'right hide-on-med-and-down lato', style: { marginTop: "0px" } },
+                            'li',
+                            { className: 'center' },
                             _react2.default.createElement(
-                                'li',
-                                null,
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: '/add' },
-                                    'Search User'
-                                )
-                            ),
+                                _reactRouterDom.Link,
+                                { className: ' text-center', to: '' },
+                                'Profile'
+                            )
+                        ),
+                        _react2.default.createElement('li', { className: 'divider' }),
+                        _react2.default.createElement(
+                            'li',
+                            null,
                             _react2.default.createElement(
-                                'li',
-                                null,
-                                _react2.default.createElement(
-                                    'a',
-                                    null,
-                                    'Profile'
-                                )
-                            ),
+                                _reactRouterDom.Link,
+                                { to: '', className: ' text-center' },
+                                'Friends'
+                            )
+                        ),
+                        _react2.default.createElement('li', { className: 'divider' }),
+                        _react2.default.createElement(
+                            'li',
+                            null,
                             _react2.default.createElement(
-                                'li',
-                                null,
-                                _react2.default.createElement(
-                                    'a',
-                                    null,
-                                    'Friends'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'li',
-                                { id: 'logout', onClick: this.handleLogout.bind(this) },
-                                _react2.default.createElement(
-                                    'a',
-                                    null,
-                                    'Logout'
-                                )
+                                'a',
+                                { className: ' text-center', id: 'logout', onClick: this.handleLogout.bind(this) },
+                                'Logout'
                             )
                         )
                     )
@@ -29910,10 +29910,18 @@ var HomePage = function (_Component) {
     }, {
         key: 'submitChange',
         value: function submitChange() {
+
             var Details = Object.assign({}, this.state);
-            Details.status.push({ username: this.props.username, message: Details.currentStatus, time: new Date() });
-            this.setState(Details);
-            document.getElementById('status-text').value = "";
+            if (Details.currentStatus == "") {
+                Materialize.toast("Sorry, you can't post an empty status!", 4000);
+            } else {
+                Details.status.push({ username: this.props.username, message: Details.currentStatus, time: new Date() });
+                this.setState(Details);
+                this.setState({
+                    currentStatus: ""
+                });
+                document.getElementById('status-text').value = "";
+            }
         }
     }, {
         key: 'render',
@@ -30051,7 +30059,7 @@ var Status = function (_Component) {
                         { className: 'col-xs-2 col-md-3 col-lg-4' },
                         _react2.default.createElement(
                             'button',
-                            { onClick: this.props.callback_two, className: 'btn btn-block btn-info' },
+                            { onClick: this.props.callback_two, id: 'post-button', className: 'btn btn-block btn-info text-center', style: { padding: 0 } },
                             'Post'
                         )
                     )
@@ -30100,31 +30108,72 @@ var AllStatus = function (_Component) {
     }
 
     _createClass(AllStatus, [{
-        key: "render",
+        key: 'handleLike',
+        value: function handleLike() {
+            Materialize.toast('You liked the post!', 4000);
+        }
+    }, {
+        key: 'render',
         value: function render() {
             var timeString = this.props.status.time.toString();
             var time = timeString.substring(16, 21) + " " + timeString.substring(0, 4) + " " + timeString.substring(4, 11);
             return _react2.default.createElement(
-                "div",
-                { style: { width: '90%', backgroundColor: "cyan", fontFamily: "Lato" } },
+                'div',
+                { className: 'row', id: 'status-row', style: { width: '90%', fontFamily: "Lato" } },
                 _react2.default.createElement(
-                    "div",
-                    { className: "row", style: { padding: 8, borderTopRightRadius: '50px' } },
+                    'div',
+                    { className: 'col s12 m11 l10' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "col-xs-8 col-md-8 col-lg-8" },
-                        this.props.status.username,
-                        _react2.default.createElement("br", null),
-                        _react2.default.createElement("br", null),
-                        this.props.status.message
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "col-xs-4 col-md-4 col-lg-4" },
-                        time
+                        'div',
+                        { className: 'card blue-grey darken-1' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-content white-text' },
+                            _react2.default.createElement(
+                                'span',
+                                { className: 'card-title' },
+                                this.props.status.username
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                this.props.status.message
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-action' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#', onClick: this.handleLike.bind(this), style: { height: "100%", padding: "0 20px" } },
+                                _react2.default.createElement('span', { className: 'fa fa-heart' }),
+                                ' Like'
+                            ),
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#', style: { float: 'right' } },
+                                _react2.default.createElement('span', { className: 'fa fa-clock-o' }),
+                                ' ',
+                                time
+                            )
+                        )
                     )
-                )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('hr', null)
             );
+            {/*<div >
+                   <div className="row" style={{padding: 8, borderTopRightRadius: '50px'}}>
+                       <div className="col-xs-8 col-md-8 col-lg-8">
+                           <br />
+                           <br />
+                           
+                       </div>
+                       <div className="col-xs-4 col-md-4 col-lg-4">
+                           
+                       </div>
+                   </div>
+                </div>*/}
         }
     }]);
 
