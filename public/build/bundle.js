@@ -12895,6 +12895,11 @@ var Navigation = function (_Component) {
             });
         }
     }, {
+        key: 'dropdownitem',
+        value: function dropdownitem() {
+            dropDown();
+        }
+    }, {
         key: 'render',
         value: function render() {
             if (window.screen.width > 780) return _react2.default.createElement(
@@ -12905,7 +12910,7 @@ var Navigation = function (_Component) {
                     { className: 'nav-wrapper' },
                     _react2.default.createElement(
                         'a',
-                        { id: 'showsDropDown', className: 'dropdown-button btn brand-logo center', style: { paddingTop: "18px", background: 'transparent', height: "100%", width: "100%" }, 'data-activates': 'dropdown1' },
+                        { id: 'showsDropDown', onClick: this.dropdownitem.bind(this), className: 'dropdown-button btn brand-logo center', style: { paddingTop: "18px", background: 'transparent', height: "100%", width: "100%" }, 'data-activates': 'dropdown1' },
                         'Welcome to CodeBook, ',
                         this.props.username,
                         '! ',
