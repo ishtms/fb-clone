@@ -12905,7 +12905,7 @@ var Navigation = function (_Component) {
                     { className: 'nav-wrapper' },
                     _react2.default.createElement(
                         'a',
-                        { className: 'dropdown-button btn brand-logo center', style: { paddingTop: "18px", background: 'transparent', height: "100%", width: "100%" }, href: '#', 'data-activates': 'dropdown1' },
+                        { className: 'dropdown-button btn brand-logo center', style: { paddingTop: "18px", background: 'transparent', height: "100%", width: "100%" }, 'data-activates': 'dropdown1' },
                         'Welcome to CodeBook, ',
                         this.props.username,
                         '! ',
