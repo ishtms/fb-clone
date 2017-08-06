@@ -28512,16 +28512,9 @@ var Signup = function (_Component) {
                             'div',
                             { className: 'row' },
                             _react2.default.createElement(
-                                'h2',
-                                { className: 'text-center text-primary' },
-                                'Please enter your details '
-                            ),
-                            _react2.default.createElement('br', null),
-                            _react2.default.createElement('br', null),
-                            _react2.default.createElement(
                                 'div',
-                                { id: 'alert-message', className: 'text-center alert alert-info' },
-                                this.state.validation ? "Provide accurate information please" : "Please fill up all the blanks"
+                                { className: 'text-center alert alert-info' },
+                                'Please enter your details'
                             ),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement(
@@ -28627,14 +28620,18 @@ var Signup = function (_Component) {
                             _react2.default.createElement('br', null)
                         ),
                         _react2.default.createElement(
-                            _reactTouchEvents2.default,
-                            {
-                                onTap: this.handleSignUp.bind(this) },
-                            _react2.default.createElement(
-                                'button',
-                                { id: 'signup', onTouchStart: this.handleSignUp.bind(this), onClick: this.handleSignUp.bind(this), className: 'btn btn-block btn-success' },
-                                'Signup'
-                            )
+                            'div',
+                            { id: 'alert-message', className: 'text-center alert alert-danger' },
+                            this.state.validation ? "Provide accurate information please" : "Please fill up all the blanks",
+                            '\xA0\xA0\xA0\xA0',
+                            _react2.default.createElement('i', { className: 'fa fa-info-circle' })
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'button',
+                            { id: 'signup', onTouchStart: this.handleSignUp.bind(this), onClick: this.handleSignUp.bind(this), className: 'btn waves-efect waves-light btn btn-block' },
+                            _react2.default.createElement('i', { className: 'material-icons right' }),
+                            'Submit'
                         ),
                         _react2.default.createElement('br', null),
                         _react2.default.createElement(
@@ -28642,7 +28639,7 @@ var Signup = function (_Component) {
                             { style: { textDecoration: 'none' }, to: '/login' },
                             _react2.default.createElement(
                                 'button',
-                                { className: 'btn btn-block btn-success' },
+                                { className: 'btn-block waves-effect waves-light btn' },
                                 'Already have an account?'
                             )
                         )
@@ -29761,6 +29758,7 @@ var Main = function (_React$Component) {
                         )
                     ),
                     _react2.default.createElement('br', null),
+                    _react2.default.createElement('br', null),
                     'Are you new? ',
                     _react2.default.createElement(
                         _reactRouterDom.Link,
@@ -29937,7 +29935,7 @@ var HomePage = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-xs-8 col-md-8 col-lg-8', id: 'status-section', style: { marginTop: "5%" } },
+                        { className: 'col-xs-9 col-md-9 col-lg-9', id: 'status-section', style: { marginTop: "0%" } },
                         _react2.default.createElement(_Status2.default, { username: this.props.username, callback: this.renderChange.bind(this), callback_two: this.submitChange.bind(this) }),
                         _react2.default.createElement(
                             'ul',

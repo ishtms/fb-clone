@@ -110,8 +110,7 @@ export default class Signup extends Component{
                     </div>
                     <div className="col-md-7 col-xs-7 col-lg-7">
                         <div className="row">
-                        <h2 className="text-center text-primary">Please enter your details </h2><br /><br />
-                            <div id="alert-message" className="text-center alert alert-info">{(this.state.validation) ? "Provide accurate information please" : "Please fill up all the blanks"}</div>
+                            <div className="text-center alert alert-info">Please enter your details</div>
                             <br />
 
                             <div className="col-xs-3 col-md-3 col-lg-3">First Name: &nbsp;</div>
@@ -141,13 +140,12 @@ export default class Signup extends Component{
                             <div className="col-xs-3 col-md-3 col-lg-3">State: &nbsp;</div>
                             <div className="col-xs-9 col-md-9 col-lg-9"><input type="text" id="state" placeholder="Current State" onChange={this.handleChange} className="form-control" name="state" /></div><br />
                         </div>
-                        <ReactTouchEvents 
-                            onTap={ this.handleSignUp.bind(this) }>
-                            <button  id="signup" onTouchStart={this.handleSignUp.bind(this)} onClick={this.handleSignUp.bind(this)} className="btn btn-block btn-success">Signup</button>
-                            </ReactTouchEvents>
+                        <div id="alert-message" className="text-center alert alert-danger">{(this.state.validation) ? "Provide accurate information please" : "Please fill up all the blanks"}&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-info-circle"></i></div><br />
+                            <button  id="signup"  onTouchStart={this.handleSignUp.bind(this)} onClick={this.handleSignUp.bind(this)} className="btn waves-efect waves-light btn btn-block"><i className="material-icons right"></i>Submit</button>
+                            
                             <br />
 
-                        <Link style={{textDecoration:'none'}} to="/login"><button className="btn btn-block btn-success">Already have an account?</button></Link>
+                        <Link style={{textDecoration:'none'}} to="/login"><button className="btn-block waves-effect waves-light btn">Already have an account?</button></Link>
                         
                     </div>
                     <div className="col-md-3 col-xs-3 col-lg-3">

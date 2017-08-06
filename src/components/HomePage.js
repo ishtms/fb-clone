@@ -81,14 +81,13 @@ export default class HomePage extends Component{
                     {findFriends}
                     </ul>
                 </div>
-                <div className="col-xs-8 col-md-8 col-lg-8" id="status-section" style={{marginTop:"5%"}}>
+                <div className="col-xs-9 col-md-9 col-lg-9" id="status-section" style={{marginTop:"0%"}}>
                     <Status username={this.props.username} callback={this.renderChange.bind(this)} callback_two={this.submitChange.bind(this)} />
                     <ul id="status-list">  
                         {
                             sortedStatus.map((status,index) => {
                                 return (
                                     <li key={index}><AllStatus status={status}/></li>
-                                    
                                 );
                             })
                         }
