@@ -12897,7 +12897,7 @@ var Navigation = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
+            window.screen.width > 780 ? _react2.default.createElement(
                 'nav',
                 null,
                 _react2.default.createElement(
@@ -12952,6 +12952,47 @@ var Navigation = function (_Component) {
                                 { className: ' text-center', id: 'logout', onClick: this.handleLogout.bind(this) },
                                 'Logout'
                             )
+                        )
+                    )
+                )
+            ) : _react2.default.createElement(
+                'div',
+                { id: 'navigation' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-md-6 col-lg-6 inCenter' },
+                        'Welcome to CodeBook, ',
+                        this.props.username,
+                        '!'
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-md-6 col-lg-6 text-right inCenter' },
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '/add' },
+                            'Search User'
+                        ),
+                        ' | ',
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '' },
+                            'Profile'
+                        ),
+                        ' | ',
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '' },
+                            'Friends'
+                        ),
+                        ' | ',
+                        _react2.default.createElement(
+                            'span',
+                            { id: 'logout', onClick: this.handleLogout.bind(this) },
+                            'Logout'
                         )
                     )
                 )

@@ -24,8 +24,8 @@ export default class Navigation extends Component{
             })
     }
     render(){
-        return (
-            <nav>
+        (window.screen.width>780) ?
+          (<nav>
                 <div className="nav-wrapper">
                     <a className='dropdown-button btn brand-logo center' style={{paddingTop:"18px",background:'transparent', height:"100%",width:"100%"}} href='#' data-activates='dropdown1'>
                         Welcome to CodeBook, {this.props.username}! <span className="fa fa-arrow-circle-down"></span>
@@ -41,7 +41,18 @@ export default class Navigation extends Component{
                     </ul>
 
                 </div>
-            </nav>
+            </nav>)
+        :
+            (<div id="navigation">
+                <div className='row'>
+                    <div className="col-xs-6 col-md-6 col-lg-6 inCenter">
+                        Welcome to CodeBook, {this.props.username}!
+                    </div>
+                    <div className="col-xs-6 col-md-6 col-lg-6 text-right inCenter">
+                        <Link to="/add">Search User</Link> | <Link to="">Profile</Link> | <Link to="">Friends</Link> | <span id="logout" onClick={this.handleLogout.bind(this)}>Logout</span>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
