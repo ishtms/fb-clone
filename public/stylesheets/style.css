@@ -13,6 +13,9 @@ a {
   color: #00B7FF;
   text-decoration: none;
 }
+.inCenter a {
+    color: #fff !important;
+}
 a:hover{
   text-decoration: none !important;
 }

@@ -12897,7 +12897,7 @@ var Navigation = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            window.screen.width > 780 ? _react2.default.createElement(
+            if (window.screen.width > 780) return _react2.default.createElement(
                 'nav',
                 null,
                 _react2.default.createElement(
@@ -12955,7 +12955,7 @@ var Navigation = function (_Component) {
                         )
                     )
                 )
-            ) : _react2.default.createElement(
+            );else return _react2.default.createElement(
                 'div',
                 { id: 'navigation' },
                 _react2.default.createElement(
