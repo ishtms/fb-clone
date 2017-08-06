@@ -61,18 +61,7 @@ export default class HomePage extends Component{
         var sortedStatus = this.state.status.sort((a,b) => {
             return (b.time - a.time);
         })
-        var findStatus = 
-            sortedStatus.map((status,index) => {
-                return (
-                    <ReactCSSTransitionGroup 
-                    transitionName="fade"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}
-                    >
-                    <li key={index}><AllStatus status={status}/></li>
-                    </ReactCSSTransitionGroup>
-                );
-            })
+        
         console.log("render from parent");
         var findFriends =
             this.state.friends.map((friend, index)=>{
@@ -94,8 +83,15 @@ export default class HomePage extends Component{
                 </div>
                 <div className="col-xs-8 col-md-8 col-lg-8" id="status-section" style={{marginTop:"5%"}}>
                     <Status username={this.props.username} callback={this.renderChange.bind(this)} callback_two={this.submitChange.bind(this)} />
-                    <ul id="status-list">
-                    {findStatus}
+                    <ul id="status-list">  
+                        {
+                            sortedStatus.map((status,index) => {
+                                return (
+                                    <li key={index}><AllStatus status={status}/></li>
+                                    
+                                );
+                            })
+                        }
                     </ul>
                 </div>
             </div>
