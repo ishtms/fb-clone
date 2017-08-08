@@ -43,6 +43,12 @@ export default class Main extends React.Component{
                     <br />
                     Are you new? <Link to='/signup'><button className="btn btn-primary">SignUp</button></Link>
                 </div>
+                <button id="chat">Chat</button>
+                <div id="messages">
+                   
+                </div>
+    <input type="text" id="txt" />
+    <input type="text" id="u" placeholder="username" />
             </div>
         );
     }

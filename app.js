@@ -15,6 +15,36 @@ var s_check = require('./routes/s_check');
 
 var app = express();
 var initReactFastclick = require('react-fastclick');
+
+var socketio = require('socket.io');
+var io = socketio();
+app.io = io;
+
+let connections = [];
+let user = [];
+
+var routes = require('./routes/websocket')(io);
+
+io.sockets.on("connection", function(socket){
+  connections.push(socket);
+  console.log("connected ", connections.length, "  sockets");
+  socket.on('disconnect', function(data){
+connections.splice(connections.indexOf(socket), 1);
+console.log("Disconencted: ", connections.length, ' users');
+  })
+socket.on('typing', function(data){
+  io.sockets.emit('typingp',{});
+})
+socket.on('blur', function(data){
+  io.sockets.emit('blurp',{});
+})
+  //send Message
+  socket.on('send message', function(data){
+    console.log(data);
+    io.sockets.emit('new message', {msg: data});
+  })
+})
+  
 initReactFastclick();
 //connecting to mongodb
 mongoose.connect('mongodb://ishtmeet:390775866@ds051903.mlab.com:51903/fb-clone', function(err){
@@ -44,6 +74,7 @@ app.use('/register', register);
 app.use('/s_check',s_check);
 app.use('/adduser',adduser);
 // catch 404 and forward to error handler
+
 app.use(function(req, res, next) {
   
   var err = new Error('Not Found');

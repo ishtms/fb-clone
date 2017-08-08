@@ -5,6 +5,12 @@ import superagent from 'superagent';
 import Status from './Status';
 import AllStatus from './AllStatus';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class HomePage extends Component{
     componentWillMount(){
@@ -74,25 +80,70 @@ export default class HomePage extends Component{
         var sortedStatus = this.state.status.sort((a,b) => {
             return (b.time - a.time);
         })
+        /*
         
+      
+      <ListItem
+        primaryText="Eric Hoffman"
+        leftAvatar={<Avatar src="images/kolage-128.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
+      <ListItem
+        primaryText="Grace Ng"
+        leftAvatar={<Avatar src="images/uxceo-128.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
+      <ListItem
+        primaryText="Kerem Suer"
+        leftAvatar={<Avatar src="images/kerem-128.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
+      <ListItem
+        primaryText="Raquel Parrado"
+        leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
+    </List>
+    <Divider />
+    <List>
+      <Subheader>Previous chats</Subheader>
+      <ListItem
+        primaryText="Chelsea Otakan"
+        leftAvatar={<Avatar src="images/chexee-128.jpg" />}
+      />
+      <ListItem
+        primaryText="James Anderson"
+        leftAvatar={<Avatar src="images/jsa-128.jpg" />}
+      />
+    </List>
+  </MobileTearSheet>
+        */
         console.log("render from parent");
         var findFriends =
             this.state.friends.map((friend, index)=>{
                 let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
-                return (<li key={index}><Link to={url} key={index}>{friend}</Link></li>);
+                return (
+                  <Link to={url}>  <ListItem
+                        primaryText={friend}
+                        leftAvatar={<Avatar src="/images/loading.gif" />}
+                        rightIcon={<CommunicationChatBubble />}
+                    /></Link>
+                );
             });
         
        return (
+             <MuiThemeProvider>
            <div>
             <Navigation username={this.props.username} />
             <div className="row" id="content">
                 <div className="col-xs-3 col-md-3 col-lg-3 text-center" id="friend-section">
-                    <span id="title">Friends</span>
                     <br />
                     <br />
-                    <ul id="friend-list" style={{padding: 6}} >
-                    {findFriends}
-                    </ul>
+                        <List>
+                            <Subheader style={{fontSize: "2em"}}>Recent chats</Subheader>
+                            {findFriends}
+                        </List>
+
                 </div>
                 <div className="col-xs-9 col-md-9 col-lg-9" id="status-section" style={{marginTop:"0%"}}>
                     <Status username={this.props.username} callback={this.renderChange.bind(this)} callback_two={this.submitChange.bind(this)} />
@@ -108,6 +159,7 @@ export default class HomePage extends Component{
                 </div>
             </div>
         </div>
+        </MuiThemeProvider>
        );
         
     }

@@ -14,6 +14,8 @@
     "express": "~4.15.2",
     "express-session": "^1.15.5",
     "history": "^4.6.3",
+    "http": "0.0.0",
+    "material-ui": "^0.18.7",
     "mongoose": "4.11.4",
     "morgan": "~1.8.1",
     "nodemon": "^1.11.0",
@@ -25,6 +27,7 @@
     "react-tappable": "^1.0.0",
     "react-touch-events": "^2.1.0",
     "serve-favicon": "~2.4.2",
+    "socket.io": "^2.0.3",
     "superagent": "^3.5.2",
     "webpack": "^3.4.1"
   },

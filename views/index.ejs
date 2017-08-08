@@ -9,22 +9,56 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+
+  
   </head>
   <body>
   <img src="/images/loading.gif" style="height:100%; width:100%; position:fixed; background-color: white" id="loading"  />
     <div id="app"></div>
+    
     <script src="/build/bundle.js"></script>
       <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
   <script type="text/javascript">
+  function setPlaceholder(){
+    document.getElementById('txt').placeholder = "Type a message...";
+  }
+  $(function(){
+    var socket = io.connect();
+
+    $("#txt").focus(function(){
+      socket.emit('typing');
+      document.getElementById('txt').placeholder = "Type to chat";
+    })
+    $("#txt").blur(function(){
+      socket.emit('blur');
+      
+    })
+    socket.on('typingp', function(data){
+      document.getElementById('txt').placeholder = "Someone is typing...";
+    })
+    socket.on('blurp', function(data){
+      document.getElementById('txt').placeholder = "Type to chat...";
+    })
+    $('#chat').click(function(){
+      var a = [document.getElementById('txt').value, document.getElementById('u').value];
+      socket.emit('send message', a);
+      document.getElementById('txt').value = ""
+    })
+
+    socket.on('new message', function(data){
+      //document.getElementById('chat').
+      $('#messages').append("<div class='btn btn-block'>"+data.msg[1]+" Said : "+data.msg[0]+"</div>")
+    })
+  });
      function dropDown(){
           $('.dropdown-button').dropdown();
           console.log('droppeddown')
        }
 
-     $( document ).ready(function() {
        $(".dropdown-button").dropdown({ hover: false, belowOrigin: true, constrain_width: false, alignment: 'right', inDuration: 300, outDuration: 225, gutter: 0});
-        });
         $(window).on('load',function(){
           $('#loading').hide();
         });
