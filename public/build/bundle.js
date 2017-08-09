@@ -32609,12 +32609,12 @@ var HomePage = function (_Component) {
                 Materialize.toast("Sorry, you can't post an empty status!", 4000);
             } else {
                 socket.emit('updateCall', status);
+                socket.emit('blur');
             }
             Details.currentStatus = "";
             document.getElementById('status-text').value = "";
             document.getElementById('status-text').placeholder = "Type to chat...";
             this.setState(Details);
-            socket.emit('blur');
         }
     }, {
         key: 'render',
