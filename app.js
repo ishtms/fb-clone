@@ -33,7 +33,7 @@ connections.splice(connections.indexOf(socket), 1);
 console.log("Disconencted: ", connections.length, ' users');
   })
 socket.on('typing', function(data){
-  io.sockets.emit('typingp',{});
+  io.sockets.emit('typingp',data);
 })
 socket.on('blur', function(data){
   io.sockets.emit('blurp',{});

@@ -5,6 +5,12 @@ import HomePage from './HomePage';
 
 export default class Main extends React.Component{
     
+    handleChange(event){
+        let details = Object.assign({},this.state);
+        details.message = event.target.value;
+
+        this.setState(details);
+    }
     componentWillMount(){
         var component  = this;
         superagent
@@ -43,12 +49,6 @@ export default class Main extends React.Component{
                     <br />
                     Are you new? <Link to='/signup'><button className="btn btn-primary">SignUp</button></Link>
                 </div>
-                <button id="chat">Chat</button>
-                <div id="messages">
-                   
-                </div>
-    <input type="text" id="txt" />
-    <input type="text" id="u" placeholder="username" />
             </div>
         );
     }

@@ -60,6 +60,7 @@ export default class HomePage extends Component{
         let Details = Object.assign({},this.state);
         Details.currentStatus = event.target.value;
         this.setState(Details);
+           keyDown(this.props.username);
     }
     submitChange(){
         
@@ -76,48 +77,14 @@ export default class HomePage extends Component{
         }
         
     }
+    
     render(){
+        
+
         var sortedStatus = this.state.status.sort((a,b) => {
             return (b.time - a.time);
         })
-        /*
         
-      
-      <ListItem
-        primaryText="Eric Hoffman"
-        leftAvatar={<Avatar src="images/kolage-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Grace Ng"
-        leftAvatar={<Avatar src="images/uxceo-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Kerem Suer"
-        leftAvatar={<Avatar src="images/kerem-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Raquel Parrado"
-        leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-    </List>
-    <Divider />
-    <List>
-      <Subheader>Previous chats</Subheader>
-      <ListItem
-        primaryText="Chelsea Otakan"
-        leftAvatar={<Avatar src="images/chexee-128.jpg" />}
-      />
-      <ListItem
-        primaryText="James Anderson"
-        leftAvatar={<Avatar src="images/jsa-128.jpg" />}
-      />
-    </List>
-  </MobileTearSheet>
-        */
         console.log("render from parent");
         var findFriends =
             this.state.friends.map((friend, index)=>{

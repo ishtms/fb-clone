@@ -32382,6 +32382,14 @@ var Main = function (_React$Component) {
     _inherits(Main, _React$Component);
 
     _createClass(Main, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var details = Object.assign({}, this.state);
+            details.message = event.target.value;
+
+            this.setState(details);
+        }
+    }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
             var component = this;
@@ -32450,15 +32458,7 @@ var Main = function (_React$Component) {
                             'SignUp'
                         )
                     )
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { id: 'chat' },
-                    'Chat'
-                ),
-                _react2.default.createElement('div', { id: 'messages' }),
-                _react2.default.createElement('input', { type: 'text', id: 'txt' }),
-                _react2.default.createElement('input', { type: 'text', id: 'u', placeholder: 'username' })
+                )
             );
         }
     }]);
@@ -32592,6 +32592,7 @@ var HomePage = function (_Component) {
             var Details = Object.assign({}, this.state);
             Details.currentStatus = event.target.value;
             this.setState(Details);
+            keyDown(this.props.username);
         }
     }, {
         key: 'submitChange',
@@ -32617,43 +32618,7 @@ var HomePage = function (_Component) {
             var sortedStatus = this.state.status.sort(function (a, b) {
                 return b.time - a.time;
             });
-            /*
-            
-                  <ListItem
-            primaryText="Eric Hoffman"
-            leftAvatar={<Avatar src="images/kolage-128.jpg" />}
-            rightIcon={<CommunicationChatBubble />}
-            />
-            <ListItem
-            primaryText="Grace Ng"
-            leftAvatar={<Avatar src="images/uxceo-128.jpg" />}
-            rightIcon={<CommunicationChatBubble />}
-            />
-            <ListItem
-            primaryText="Kerem Suer"
-            leftAvatar={<Avatar src="images/kerem-128.jpg" />}
-            rightIcon={<CommunicationChatBubble />}
-            />
-            <ListItem
-            primaryText="Raquel Parrado"
-            leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />}
-            rightIcon={<CommunicationChatBubble />}
-            />
-            </List>
-            <Divider />
-            <List>
-            <Subheader>Previous chats</Subheader>
-            <ListItem
-            primaryText="Chelsea Otakan"
-            leftAvatar={<Avatar src="images/chexee-128.jpg" />}
-            />
-            <ListItem
-            primaryText="James Anderson"
-            leftAvatar={<Avatar src="images/jsa-128.jpg" />}
-            />
-            </List>
-            </MobileTearSheet>
-            */
+
             console.log("render from parent");
             var findFriends = this.state.friends.map(function (friend, index) {
                 var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
@@ -32766,6 +32731,11 @@ var Status = function (_Component) {
     }
 
     _createClass(Status, [{
+        key: 'key',
+        value: function key() {
+            keyDown();
+        }
+    }, {
         key: 'render',
         value: function render() {
             console.log("CHILD RENDER CALLED");
@@ -32778,7 +32748,7 @@ var Status = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'col-xs-10 col-md-9 col-lg-8' },
-                        _react2.default.createElement('textarea', { onChange: this.props.callback, rows: '3', id: 'status-text', className: 'form-control' }),
+                        _react2.default.createElement('textarea', { onChange: this.props.callback, onKeyDown: this.key.bind(this), rows: '3', id: 'status-text', className: 'form-control' }),
                         _react2.default.createElement('br', null)
                     ),
                     _react2.default.createElement(

@@ -22,25 +22,38 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
   <script type="text/javascript">
+  var socket = io.connect();
+  function keyDown(user){
+    console.log("user is ",user);
+    
+      if(document.getElementById('status-text').value == ""){
+        socket.emit("blur")
+      }else{
+        socket.emit('typing', user);
+      }
+      document.getElementById('status-text').placeholder = "Type to chat";
+    };
   function setPlaceholder(){
     document.getElementById('txt').placeholder = "Type a message...";
   }
   $(function(){
-    var socket = io.connect();
+    
 
-    $("#txt").focus(function(){
-      socket.emit('typing');
-      document.getElementById('txt').placeholder = "Type to chat";
-    })
     $("#txt").blur(function(){
       socket.emit('blur');
       
     })
     socket.on('typingp', function(data){
-      document.getElementById('txt').placeholder = "Someone is typing...";
-    })
+      console.log(data);
+      if(document.getElementById('status-text').placeholder.indexOf('is typing')<=0){
+        document.getElementById('status-text').placeholder = data + "is typing...";
+      }
+        
+      });
+      
+    
     socket.on('blurp', function(data){
-      document.getElementById('txt').placeholder = "Type to chat...";
+      document.getElementById('status-text').placeholder = "Type to chat...";
     })
     $('#chat').click(function(){
       var a = [document.getElementById('txt').value, document.getElementById('u').value];
@@ -55,7 +68,6 @@
   });
      function dropDown(){
           $('.dropdown-button').dropdown();
-          console.log('droppeddown')
        }
 
        $(".dropdown-button").dropdown({ hover: false, belowOrigin: true, constrain_width: false, alignment: 'right', inDuration: 300, outDuration: 225, gutter: 0});
