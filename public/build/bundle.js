@@ -32549,13 +32549,24 @@ var HomePage = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
+            var Details = Object.assign({}, this.state);
+            _superagent2.default.get('/comments').query().set("Accept", 'application/json').end(function (err, response) {
+                if (err) {
+                    Materialize.toast('An error occured while fetching data!', 8000);
+                } else {
+                    console.log(response.body.result);
+                    var sortedarr = response.body.result.sort(function (a, b) {
+                        return b.time - a.time;
+                    });
+                    Details.status = sortedarr;
+                    _this2.setState(Details);
+                }
+            });
             var socket = io();
             window.addEventListener("beforeunload", function (ev) {
                 socket.emit('userdc', _this2.props.username);
             });
             var self = this;
-            var Details = Object.assign({}, this.state);
-
             socket.on('showusers', function (data) {
                 Details.online = data;
                 self.setState(Details);
@@ -32576,15 +32587,7 @@ var HomePage = function (_Component) {
 
         _this.state = {
             online: [],
-            status: [{
-                username: "Ishtmeet",
-                message: "Hello this is a wonderful day",
-                time: new Date()
-            }, {
-                username: "Tavleen",
-                message: "Hello despacito reached 3 Billion views!",
-                time: new Date()
-            }],
+            status: [],
             currentStatus: ""
         };
         return _this;
@@ -32603,15 +32606,25 @@ var HomePage = function (_Component) {
         value: function submitChange() {
             var socket = io();
             var Details = Object.assign({}, this.state);
+
             var status = {
                 username: this.props.username,
                 message: Details.currentStatus
             };
+
             if (Details.currentStatus == "") {
                 Materialize.toast("Sorry, you can't post an empty status!", 4000);
             } else {
                 socket.emit('updateCall', status);
                 socket.emit('blur');
+
+                _superagent2.default.post('/comments').send(status).set('Accept', "application/json").end(function (err, response) {
+                    if (err) {
+                        Materialize.toast("An error occured while saving your message! Please try again later.", 5000);
+                    } else {
+                        console.log('message saved');
+                    }
+                });
             }
             Details.currentStatus = "";
             document.getElementById('status-text').value = "";
@@ -32812,7 +32825,7 @@ var AllStatus = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var timeString = this.props.status.time.toString();
+            var timeString = new Date(this.props.status.time).toString();
 
             var time = timeString.substring(16, 21) + " " + timeString.substring(0, 4) + " " + timeString.substring(4, 11);
             return _react2.default.createElement(

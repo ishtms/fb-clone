@@ -5,8 +5,8 @@ export default class AllStatus extends Component{
         Materialize.toast('You liked the post!', 4000)
     }
     render(){
-        var timeString = this.props.status.time.toString();
-
+        var timeString = new Date(this.props.status.time).toString();
+        
         var time = timeString.substring(16,21)+ " "+timeString.substring(0,4)+" "+ timeString.substring(4,11);
         return (
             <div className="row" id="status-row" style={{width: '90%', fontFamily: "Lato"}}>

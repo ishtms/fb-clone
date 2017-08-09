@@ -12,6 +12,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
 var s_check = require('./routes/s_check');
+var comments = require('./routes/comments');
 
 var app = express();
 var initReactFastclick = require('react-fastclick');
@@ -79,6 +80,7 @@ app.use('/users', users);
 app.use('/register', register);
 app.use('/s_check',s_check);
 app.use('/adduser',adduser);
+app.use('/comments', comments);
 // catch 404 and forward to error handler
 
 app.use(function(req, res, next) {

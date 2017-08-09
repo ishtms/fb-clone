@@ -16,7 +16,6 @@ export default class HomePage extends Component{
     componentWillMount(){
         var socket = io();
         socket.emit('online', this.props.username);
-        
     }
     componentWillUnmount(){
         var socket = io()
@@ -24,14 +23,29 @@ export default class HomePage extends Component{
     }
 
         componentDidMount(){
+            var Details = Object.assign({}, this.state);
+        superagent
+            .get('/comments')        
+            .query()
+            .set("Accept",'application/json')
+            .end((err, response)=>{
+                if(err){
+                    Materialize.toast('An error occured while fetching data!', 8000);
+                }else{
+                    console.log(response.body.result)
+                    var sortedarr = response.body.result.sort( (a,b) => {
+                            return b.time - a.time;
+                    })
+                        Details.status = sortedarr;
+                    this.setState(Details);
+                }
+            });
                   var socket = io();
             window.addEventListener("beforeunload", (ev) => 
                 {  
                    socket.emit('userdc', this.props.username);
                 });
             var self = this;
-            var Details = Object.assign({}, this.state);
-                 
                        socket.on('showusers', function(data){
                             Details.online = data;
                             self.setState(Details);
@@ -49,18 +63,7 @@ export default class HomePage extends Component{
         super(props);
         this.state = {
             online: [],
-            status: [
-                {
-                    username: "Ishtmeet",
-                    message: "Hello this is a wonderful day",
-                    time:  new Date()
-                },
-                {
-                    username: "Tavleen",
-                    message: "Hello despacito reached 3 Billion views!",
-                    time:  new Date()
-                }
-            ],
+            status: [],
             currentStatus: ""
         }
     }
@@ -73,15 +76,29 @@ export default class HomePage extends Component{
     submitChange(){
         var socket = io();
         let Details = Object.assign({},this.state);
+        
         var status = {
             username: this.props.username,
             message : Details.currentStatus
         };
+        
         if(Details.currentStatus==""){
             Materialize.toast("Sorry, you can't post an empty status!", 4000);
         }else{
             socket.emit('updateCall',status);
             socket.emit('blur');
+            
+            superagent
+            .post('/comments')
+            .send(status)
+            .set('Accept', "application/json")
+            .end( (err, response) => {
+                if(err){
+                    Materialize.toast("An error occured while saving your message! Please try again later.", 5000);
+                }else{
+                    console.log('message saved');
+                }
+            }); 
         }
         Details.currentStatus = "";
         document.getElementById('status-text').value = "";
