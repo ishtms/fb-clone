@@ -87,6 +87,7 @@ export default class HomePage extends Component{
         document.getElementById('status-text').value = "";
         document.getElementById('status-text').placeholder = "Type to chat..."
         this.setState(Details);
+        socket.emit('blur');
 
     }
     

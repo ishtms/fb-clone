@@ -32614,6 +32614,7 @@ var HomePage = function (_Component) {
             document.getElementById('status-text').value = "";
             document.getElementById('status-text').placeholder = "Type to chat...";
             this.setState(Details);
+            socket.emit('blur');
         }
     }, {
         key: 'render',
