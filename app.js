@@ -28,10 +28,14 @@ var routes = require('./routes/websocket')(io);
 io.sockets.on("connection", function(socket){
   connections.push(socket);
   console.log("connected ", connections.length, "  sockets");
-  socket.on('disconnect', function(data){
-connections.splice(connections.indexOf(socket), 1);
-console.log("Disconencted: ", connections.length, ' users');
+  socket.on('userdc', function(data){
+    user.splice(user.indexOf(data), 1);
+    io.sockets.emit('showusers', user);
   })
+socket.on('online', function(data){
+  user.push(data);
+  io.sockets.emit('showusers', user);
+})
 socket.on('updateCall', function(data){
   io.sockets.emit('finalizeUpdate', data);
 })

@@ -46,7 +46,7 @@
     socket.on('typingp', function(data){
       console.log(data);
       if(document.getElementById('status-text').placeholder.indexOf('is typing')<=0){
-        document.getElementById('status-text').placeholder = data + "is typing...";
+        document.getElementById('status-text').placeholder = data + " is typing...";
       }
         
       });

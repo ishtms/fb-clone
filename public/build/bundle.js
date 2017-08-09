@@ -32535,27 +32535,32 @@ var HomePage = function (_Component) {
     _createClass(HomePage, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            var _this2 = this;
-
-            var friendArray = [];
-
-            _superagent2.default.get('/register/profile').query({ username: this.props.username }).set("Accept", "application/json").end(function (err, response) {
-                if (err) {} else {
-                    response.body.result[0].friends.map(function (user) {
-                        friendArray.push(user);
-                    });
-                    _this2.setState({
-                        friends: friendArray
-                    });
-                }
-            });
+            var socket = io();
+            socket.emit('online', this.props.username);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            var socket = io();
+            socket.emit('userdc', this.props.username);
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
+            var socket = io();
+            window.addEventListener("beforeunload", function (ev) {
+                socket.emit('userdc', _this2.props.username);
+            });
             var self = this;
             var Details = Object.assign({}, this.state);
-            var socket = io();
+
+            socket.on('showusers', function (data) {
+                Details.online = data;
+                self.setState(Details);
+            });
+
             socket.on('finalizeUpdate', function (data) {
                 data.time = new Date();
                 Details.status.push(data);
@@ -32570,7 +32575,7 @@ var HomePage = function (_Component) {
         var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
 
         _this.state = {
-            friends: [],
+            online: [],
             status: [{
                 username: "Ishtmeet",
                 message: "Hello this is a wonderful day",
@@ -32622,15 +32627,15 @@ var HomePage = function (_Component) {
                 return b.time - a.time;
             });
 
-            var findFriends = this.state.friends.map(function (friend, index) {
-                var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
+            var findFriends = this.state.online.map(function (onlineuser, index) {
+                var url = "/show_user/" + _this3.state.online[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
                     _reactRouterDom.Link,
                     { key: index, to: url },
                     '  ',
                     _react2.default.createElement(_List.ListItem, {
-                        primaryText: friend,
-                        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: '/images/loading.gif' }),
+                        primaryText: onlineuser,
+                        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: '/images/online.jpg' }),
                         rightIcon: _react2.default.createElement(_chatBubble2.default, null)
                     })
                 );

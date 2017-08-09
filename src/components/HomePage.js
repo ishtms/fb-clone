@@ -14,28 +14,29 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class HomePage extends Component{
     componentWillMount(){
-        var friendArray = [];
+        var socket = io();
+        socket.emit('online', this.props.username);
         
-        superagent
-            .get('/register/profile')
-            .query({username: this.props.username})
-            .set("Accept", "application/json")
-            .end((err, response) => {
-                if(err){
-                }else{
-                    response.body.result[0].friends.map((user) => {
-                        friendArray.push(user);
-                    })
-                    this.setState({
-                        friends: friendArray
-                    })
-                }
-            });
     }
+    componentWillUnmount(){
+        var socket = io()
+        socket.emit('userdc', this.props.username);
+    }
+
         componentDidMount(){
+                  var socket = io();
+            window.addEventListener("beforeunload", (ev) => 
+                {  
+                   socket.emit('userdc', this.props.username);
+                });
             var self = this;
             var Details = Object.assign({}, this.state);
-                       var socket = io();
+                 
+                       socket.on('showusers', function(data){
+                            Details.online = data;
+                            self.setState(Details);
+                        })
+                        
                        socket.on('finalizeUpdate',function(data){
                            data.time = new Date()
                            Details.status.push(data);
@@ -47,7 +48,7 @@ export default class HomePage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            friends: [],
+            online: [],
             status: [
                 {
                     username: "Ishtmeet",
@@ -97,12 +98,12 @@ export default class HomePage extends Component{
         
 
         var findFriends =
-            this.state.friends.map((friend, index)=>{
-                let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
+            this.state.online.map((onlineuser, index)=>{
+                let url = "/show_user/"+this.state.online[index]+"/"+this.props.username;
                 return (
                   <Link key={index} to={url}>  <ListItem
-                        primaryText={friend}
-                        leftAvatar={<Avatar src="/images/loading.gif" />}
+                        primaryText={onlineuser}
+                        leftAvatar={<Avatar src="/images/online.jpg" />}
                         rightIcon={<CommunicationChatBubble />}
                     /></Link>
                 );
