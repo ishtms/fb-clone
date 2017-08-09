@@ -10,7 +10,6 @@ export default class Status extends Component{
     }
     
     render(){
-        console.log("CHILD RENDER CALLED")
         return (
             <div style={{width: "90%"}} className="text-center">
                 <div className="row">

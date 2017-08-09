@@ -32540,9 +32540,7 @@ var HomePage = function (_Component) {
             var friendArray = [];
 
             _superagent2.default.get('/register/profile').query({ username: this.props.username }).set("Accept", "application/json").end(function (err, response) {
-                if (err) {
-                    console.log("Some error " + err);
-                } else {
+                if (err) {} else {
                     response.body.result[0].friends.map(function (user) {
                         friendArray.push(user);
                     });
@@ -32560,7 +32558,6 @@ var HomePage = function (_Component) {
             var socket = io();
             socket.on('finalizeUpdate', function (data) {
                 data.time = new Date();
-                console.log("Data is ", data);
                 Details.status.push(data);
                 self.setState(Details);
             });
@@ -32621,12 +32618,10 @@ var HomePage = function (_Component) {
         value: function render() {
             var _this3 = this;
 
-            console.log(this.state.status.time);
             var sortedStatus = this.state.status.sort(function (a, b) {
                 return b.time - a.time;
             });
 
-            console.log("render from parent");
             var findFriends = this.state.friends.map(function (friend, index) {
                 var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
@@ -32640,7 +32635,6 @@ var HomePage = function (_Component) {
                     })
                 );
             });
-            console.log("Sorted status is ", sortedStatus);
             return _react2.default.createElement(
                 _MuiThemeProvider2.default,
                 null,
@@ -32740,7 +32734,6 @@ var Status = function (_Component) {
     _createClass(Status, [{
         key: 'render',
         value: function render() {
-            console.log("CHILD RENDER CALLED");
             return _react2.default.createElement(
                 'div',
                 { style: { width: "90%" }, className: 'text-center' },
@@ -32814,7 +32807,6 @@ var AllStatus = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.props.status);
             var timeString = this.props.status.time.toString();
 
             var time = timeString.substring(16, 21) + " " + timeString.substring(0, 4) + " " + timeString.substring(4, 11);

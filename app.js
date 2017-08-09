@@ -43,7 +43,6 @@ socket.on('blur', function(data){
 })
   //send Message
   socket.on('send message', function(data){
-    console.log(data);
     io.sockets.emit('new message', {msg: data});
   })
 })

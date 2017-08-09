@@ -22,7 +22,6 @@ export default class HomePage extends Component{
             .set("Accept", "application/json")
             .end((err, response) => {
                 if(err){
-                    console.log("Some error "+ err);
                 }else{
                     response.body.result[0].friends.map((user) => {
                         friendArray.push(user);
@@ -39,7 +38,6 @@ export default class HomePage extends Component{
                        var socket = io();
                        socket.on('finalizeUpdate',function(data){
                            data.time = new Date()
-                        console.log("Data is ", data);
                            Details.status.push(data);
                            self.setState(Details);
                        })
@@ -93,12 +91,11 @@ export default class HomePage extends Component{
     }
     
     render(){
-        console.log(this.state.status.time)
         var sortedStatus = this.state.status.sort((a,b) => {
             return (b.time - a.time);
         })
         
-        console.log("render from parent");
+
         var findFriends =
             this.state.friends.map((friend, index)=>{
                 let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
@@ -110,7 +107,6 @@ export default class HomePage extends Component{
                     /></Link>
                 );
             });
-        console.log("Sorted status is ", sortedStatus);
        return (
              <MuiThemeProvider>
            <div>

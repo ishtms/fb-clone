@@ -5,7 +5,6 @@ export default class AllStatus extends Component{
         Materialize.toast('You liked the post!', 4000)
     }
     render(){
-        console.log(this.props.status);
         var timeString = this.props.status.time.toString();
 
         var time = timeString.substring(16,21)+ " "+timeString.substring(0,4)+" "+ timeString.substring(4,11);
