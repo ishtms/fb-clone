@@ -32626,7 +32626,7 @@ var HomePage = function (_Component) {
                 var url = "/show_user/" + _this3.state.friends[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: url },
+                    { key: index, to: url },
                     '  ',
                     _react2.default.createElement(_List.ListItem, {
                         primaryText: friend,

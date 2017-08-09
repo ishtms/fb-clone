@@ -100,7 +100,7 @@ export default class HomePage extends Component{
             this.state.friends.map((friend, index)=>{
                 let url = "/show_user/"+this.state.friends[index]+"/"+this.props.username;
                 return (
-                  <Link to={url}>  <ListItem
+                  <Link key={index} to={url}>  <ListItem
                         primaryText={friend}
                         leftAvatar={<Avatar src="/images/loading.gif" />}
                         rightIcon={<CommunicationChatBubble />}
