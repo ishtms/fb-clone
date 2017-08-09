@@ -32382,14 +32382,6 @@ var Main = function (_React$Component) {
     _inherits(Main, _React$Component);
 
     _createClass(Main, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            var details = Object.assign({}, this.state);
-            details.message = event.target.value;
-
-            this.setState(details);
-        }
-    }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
             var component = this;
@@ -32562,7 +32554,17 @@ var HomePage = function (_Component) {
         }
     }, {
         key: 'componentDidMount',
-        value: function componentDidMount() {}
+        value: function componentDidMount() {
+            var self = this;
+            var Details = Object.assign({}, this.state);
+            var socket = io();
+            socket.on('finalizeUpdate', function (data) {
+                data.time = new Date();
+                console.log("Data is ", data);
+                Details.status.push(data);
+                self.setState(Details);
+            });
+        }
     }]);
 
     function HomePage(props) {
@@ -32597,24 +32599,28 @@ var HomePage = function (_Component) {
     }, {
         key: 'submitChange',
         value: function submitChange() {
-
+            var socket = io();
             var Details = Object.assign({}, this.state);
+            var status = {
+                username: this.props.username,
+                message: Details.currentStatus
+            };
             if (Details.currentStatus == "") {
                 Materialize.toast("Sorry, you can't post an empty status!", 4000);
             } else {
-                Details.status.push({ username: this.props.username, message: Details.currentStatus, time: new Date() });
-                this.setState(Details);
-                this.setState({
-                    currentStatus: ""
-                });
-                document.getElementById('status-text').value = "";
+                socket.emit('updateCall', status);
             }
+            Details.currentStatus = "";
+            document.getElementById('status-text').value = "";
+            document.getElementById('status-text').placeholder = "Type to chat...";
+            this.setState(Details);
         }
     }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
 
+            console.log(this.state.status.time);
             var sortedStatus = this.state.status.sort(function (a, b) {
                 return b.time - a.time;
             });
@@ -32633,7 +32639,7 @@ var HomePage = function (_Component) {
                     })
                 );
             });
-
+            console.log("Sorted status is ", sortedStatus);
             return _react2.default.createElement(
                 _MuiThemeProvider2.default,
                 null,
@@ -32731,11 +32737,6 @@ var Status = function (_Component) {
     }
 
     _createClass(Status, [{
-        key: 'key',
-        value: function key() {
-            keyDown();
-        }
-    }, {
         key: 'render',
         value: function render() {
             console.log("CHILD RENDER CALLED");
@@ -32748,7 +32749,7 @@ var Status = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'col-xs-10 col-md-9 col-lg-8' },
-                        _react2.default.createElement('textarea', { onChange: this.props.callback, onKeyDown: this.key.bind(this), rows: '3', id: 'status-text', className: 'form-control' }),
+                        _react2.default.createElement('textarea', { onChange: this.props.callback, rows: '3', id: 'status-text', className: 'form-control', placeholder: 'Type to chat...' }),
                         _react2.default.createElement('br', null)
                     ),
                     _react2.default.createElement(
@@ -32812,7 +32813,9 @@ var AllStatus = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.props.status);
             var timeString = this.props.status.time.toString();
+
             var time = timeString.substring(16, 21) + " " + timeString.substring(0, 4) + " " + timeString.substring(4, 11);
             return _react2.default.createElement(
                 'div',

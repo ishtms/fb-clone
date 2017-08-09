@@ -32,6 +32,9 @@ io.sockets.on("connection", function(socket){
 connections.splice(connections.indexOf(socket), 1);
 console.log("Disconencted: ", connections.length, ' users');
   })
+socket.on('updateCall', function(data){
+  io.sockets.emit('finalizeUpdate', data);
+})
 socket.on('typing', function(data){
   io.sockets.emit('typingp',data);
 })

@@ -34,7 +34,16 @@ export default class HomePage extends Component{
             });
     }
         componentDidMount(){
-                        
+            var self = this;
+            var Details = Object.assign({}, this.state);
+                       var socket = io();
+                       socket.on('finalizeUpdate',function(data){
+                           data.time = new Date()
+                        console.log("Data is ", data);
+                           Details.status.push(data);
+                           self.setState(Details);
+                       })
+
 
         }
     constructor(props){
@@ -45,12 +54,12 @@ export default class HomePage extends Component{
                 {
                     username: "Ishtmeet",
                     message: "Hello this is a wonderful day",
-                    time: new Date()
+                    time:  new Date()
                 },
                 {
                     username: "Tavleen",
                     message: "Hello despacito reached 3 Billion views!",
-                    time: new Date()
+                    time:  new Date()
                 }
             ],
             currentStatus: ""
@@ -63,24 +72,26 @@ export default class HomePage extends Component{
            keyDown(this.props.username);
     }
     submitChange(){
-        
+        var socket = io();
         let Details = Object.assign({},this.state);
+        var status = {
+            username: this.props.username,
+            message : Details.currentStatus
+        };
         if(Details.currentStatus==""){
-            Materialize.toast("Sorry, you can't post an empty status!", 4000)
+            Materialize.toast("Sorry, you can't post an empty status!", 4000);
         }else{
-            Details.status.push({username: this.props.username, message: Details.currentStatus, time: new Date()});
-            this.setState(Details)
-            this.setState({
-                currentStatus: ""
-            })            
-            document.getElementById('status-text').value = ""
+            socket.emit('updateCall',status);
         }
-        
+        Details.currentStatus = "";
+        document.getElementById('status-text').value = "";
+        document.getElementById('status-text').placeholder = "Type to chat..."
+        this.setState(Details);
+
     }
     
     render(){
-        
-
+        console.log(this.state.status.time)
         var sortedStatus = this.state.status.sort((a,b) => {
             return (b.time - a.time);
         })
@@ -97,7 +108,7 @@ export default class HomePage extends Component{
                     /></Link>
                 );
             });
-        
+        console.log("Sorted status is ", sortedStatus);
        return (
              <MuiThemeProvider>
            <div>

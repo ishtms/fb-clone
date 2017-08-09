@@ -5,12 +5,7 @@ import HomePage from './HomePage';
 
 export default class Main extends React.Component{
     
-    handleChange(event){
-        let details = Object.assign({},this.state);
-        details.message = event.target.value;
-
-        this.setState(details);
-    }
+    
     componentWillMount(){
         var component  = this;
         superagent
