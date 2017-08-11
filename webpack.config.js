@@ -1,4 +1,4 @@
-var webpack = require('webpack');//This is a comment
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
