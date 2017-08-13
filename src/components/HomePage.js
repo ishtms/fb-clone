@@ -55,6 +55,8 @@ export default class HomePage extends Component{
                            data.time = new Date()
                            Details.status.push(data);
                            self.setState(Details);
+                           var audio = new Audio('/notification.mp3');
+                            audio.play();
                        })
 
 
