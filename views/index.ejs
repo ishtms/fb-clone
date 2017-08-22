@@ -168,7 +168,10 @@ let colors = [
 
 ];
 
-
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+})
 function Circle(_x,_y,_dx,_dy,_radius){
         this.x = _x;
         this.y = _y;
