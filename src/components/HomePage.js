@@ -120,7 +120,7 @@ export default class HomePage extends Component{
             this.state.online.map((onlineuser, index)=>{
                 let url = "/show_user/"+this.state.online[index]+"/"+this.props.username;
                 return (
-                  <Link key={index} to={url}>  <ListItem
+                  <Link style={{backgroundColor: 'rgba(0,255,0,0.5)'}} key={index} to={url}>  <ListItem
                         primaryText={onlineuser}
                         leftAvatar={<Avatar src="/images/online.jpg" />}
                         rightIcon={<CommunicationChatBubble />}
@@ -136,7 +136,7 @@ export default class HomePage extends Component{
                     <br />
                     <br />
                         <List>
-                            <Subheader style={{fontSize: "2em"}}>Recent chats</Subheader>
+                            <Subheader style={{fontSize: "2em"}}>Online Users</Subheader>
                             {findFriends}
                         </List>
 

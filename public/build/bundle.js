@@ -32646,7 +32646,7 @@ var HomePage = function (_Component) {
                 var url = "/show_user/" + _this3.state.online[index] + "/" + _this3.props.username;
                 return _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { key: index, to: url },
+                    { style: { backgroundColor: 'rgba(0,255,0,0.5)' }, key: index, to: url },
                     '  ',
                     _react2.default.createElement(_List.ListItem, {
                         primaryText: onlineuser,
@@ -32676,7 +32676,7 @@ var HomePage = function (_Component) {
                                 _react2.default.createElement(
                                     _Subheader2.default,
                                     { style: { fontSize: "2em" } },
-                                    'Recent chats'
+                                    'Online Users'
                                 ),
                                 findFriends
                             )
