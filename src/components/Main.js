@@ -37,7 +37,7 @@ export default class Main extends React.Component{
         console.log("after request username is ",this.state.username)
         return (
             (!isNaN(this.state.username.length) && this.state.username.length >0)?<HomePage username={this.state.username}/>:
-            <div style={{marginTop: "10%",width: '50%',padding: '50px', float:'center', marginLeft:'25%', backgroundColor: 'rgba(255,255,255,0.3)'}}>
+            <div style={{marginTop: "10%",width: '50%', float:'center', marginLeft:'25%', backgroundColor: 'rgba(255,255,255,0.3)'}} id="login_container">
                 <h2 className="text-center">Welcome to Codebook</h2>
                  <div className="text-center">
                     Already have an account?<Link to='/login'><button className="btn btn-primary">Login</button></Link><br />
