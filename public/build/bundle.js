@@ -32872,8 +32872,7 @@ var AllStatus = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('hr', null)
+                _react2.default.createElement('br', null)
             );
             {/*<div >
                    <div className="row" style={{padding: 8, borderTopRightRadius: '50px'}}>

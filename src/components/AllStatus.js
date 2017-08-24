@@ -23,7 +23,6 @@ export default class AllStatus extends Component{
                 </div>
                 </div>
                 <br />
-                <hr />
             </div>
         );
             {/*<div >
