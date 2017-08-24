@@ -106,7 +106,7 @@ let cursorProps = {
     _xPos : null,
     _yPos : null
 }
-canvas.addEventListener('mousemove', function(event){
+window.addEventListener('mousemove', function(event){
     cursorProps._xPos = event.clientX;
     cursorProps._yPos = event.clientY;
 })
