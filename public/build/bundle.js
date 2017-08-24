@@ -32419,7 +32419,7 @@ var Main = function (_React$Component) {
             console.log("after request username is ", this.state.username);
             return !isNaN(this.state.username.length) && this.state.username.length > 0 ? _react2.default.createElement(_HomePage2.default, { username: this.state.username }) : _react2.default.createElement(
                 'div',
-                { style: { marginTop: "10%", backgroundColor: 'rgba(255,255,255,0.3)' } },
+                { style: { marginTop: "10%", width: '50%', float: 'center', marginLeft: '25%', backgroundColor: 'rgba(255,255,255,0.3)' } },
                 _react2.default.createElement(
                     'h2',
                     { className: 'text-center' },
