@@ -230,9 +230,9 @@ let drawLines = () => {
             }
         }
     }
-    if(cursorProps._xPos == null || cursorProps._yPos == null){
-        return;
-    }
+    // if(cursorProps._xPos == null || cursorProps._yPos == null){
+    //     return;
+    // }
         for(let innerIndex = 0; innerIndex < BallArray.length; innerIndex++){
             if(Math.abs(cursorProps._xPos - BallArray[innerIndex].x) <= 200 && Math.abs(cursorProps._yPos - BallArray[innerIndex].y) <= 200){
                 context.beginPath();
