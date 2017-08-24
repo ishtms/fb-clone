@@ -51,7 +51,7 @@ export default class Login extends Component{
                 <div className="col-md-4 col-xs-4 col-lg-4">
 
                     </div>
-                    <div className="col-md-4 col-xs-4 col-lg-4" style={{background: 'rgba(255,255,255,0.4)', padding: '50px'}}>
+                    <div className="col-md-4 col-xs-4 col-lg-4" style={{background: 'rgba(255,255,255,0.7)', padding: '50px'}}>
                         <input className="form-control" type="text" placeholder="Username" onChange={this.renderChange} id="username" /> <br />
                         <input className="form-control" type="password" placeholder="Password" onChange={this.renderChange} id="password" /> <br />
                         <button  onClick={this.handleLogin.bind(this)} className="btn btn-block btn-success" id="login">Login</button>  

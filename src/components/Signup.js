@@ -109,7 +109,7 @@ export default class Signup extends Component{
                     <div className="col-md-2 col-xs-2 col-lg-2">
                         {/*Empty Placeholders*/}
                     </div>
-                    <div className="col-md-7 col-xs-7 col-lg-7"  style={{background: 'rgba(255,255,255,0.4)', padding: '50px'}}>
+                    <div className="col-md-7 col-xs-7 col-lg-7"  style={{background: 'rgba(255,255,255,0.7)', padding: '50px'}}>
                         <div className="row">
                             <div className="text-center alert alert-info">Please enter your details</div>
                             <br />

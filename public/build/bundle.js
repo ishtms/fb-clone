@@ -27977,7 +27977,7 @@ var Login = function (_Component) {
                     _react2.default.createElement('div', { className: 'col-md-4 col-xs-4 col-lg-4' }),
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-md-4 col-xs-4 col-lg-4', style: { background: 'rgba(255,255,255,0.4)', padding: '50px' } },
+                        { className: 'col-md-4 col-xs-4 col-lg-4', style: { background: 'rgba(255,255,255,0.7)', padding: '50px' } },
                         _react2.default.createElement('input', { className: 'form-control', type: 'text', placeholder: 'Username', onChange: this.renderChange, id: 'username' }),
                         ' ',
                         _react2.default.createElement('br', null),
@@ -31191,7 +31191,7 @@ var Signup = function (_Component) {
                     _react2.default.createElement('div', { className: 'col-md-2 col-xs-2 col-lg-2' }),
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-md-7 col-xs-7 col-lg-7', style: { background: 'rgba(255,255,255,0.4)', padding: '50px' } },
+                        { className: 'col-md-7 col-xs-7 col-lg-7', style: { background: 'rgba(255,255,255,0.7)', padding: '50px' } },
                         _react2.default.createElement(
                             'div',
                             { className: 'row' },
